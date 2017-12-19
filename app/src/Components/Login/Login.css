@@ -1,0 +1,71 @@
+.login_page_page-container {
+    width: 100%;
+    height: 100vh;
+    background-image: url('https://www168.lunapic.com/do-not-link-here-use-hosting-instead/151371931772108?7698658');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_page_logo {
+    width: 350px;
+    margin: 40px;
+}
+
+.login_page_login-container {
+    width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 2px;
+    border: 1px solid #8b2040;
+    display: flex;
+    flex-direction: column;
+}
+
+.login_page_login-container h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    margin-top: 5px;
+}
+
+.login_page_input {
+    height: 40px;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    padding: 0 20px 0 50px;
+    border: 1px solid lightgray;
+    background: white;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    background-position: 10px;
+    border-radius: 2px;
+    font-size: 14px;
+    outline-color: none;
+}
+
+.login_page_input:focus {
+    outline-color: #97022f;
+}
+
+.username {
+    background-image: url('../../resources/shop.png');
+}
+
+.password {
+    background-image: url('../../resources/key.png')
+}
+
+.login_page_login-button {
+    height: 40px;
+    border: none;
+    border-radius: 2px;
+    background: #af355a;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+}
