@@ -1,0 +1,7 @@
+.certificate_product-container {
+    margin-top: 100px;
+    background-color: lightslategray;
+    width: 650px;
+    display: flex;
+    flex-direction: column;
+}
