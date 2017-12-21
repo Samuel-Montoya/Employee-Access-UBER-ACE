@@ -1,7 +1,58 @@
-.certificate_product-container {
+.certificate_page-container {
     margin-top: 100px;
-    background-color: lightslategray;
     width: 650px;
+}
+
+.certificate_buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.certificate_product-container {
+    background-color: rgb(240, 240, 240);
+    font-size: 18px;
+    border-radius: 2px;
     display: flex;
     flex-direction: column;
+    padding: 15px;
+}
+
+.certificate_product-header {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        font-size: 20px;
+        font-weight: bolder;
+}
+
+.certificate_product-container h2 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.certificate_product-container h1 {
+    color: rgb(53, 53, 53);
+}
+
+.certificate_header-underline {
+    width: 100%;
+    margin-bottom: 15px;
+    border-style: solid;
+    border: 1px solid rgb(143, 143, 143);
+}
+
+.certificate_information-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 120px;
+}
+
+.certificate_information-container i {
+    margin-right: 10px;
+    border-radius: 2px;
+    padding: 3px;
+    color: white;
 }
