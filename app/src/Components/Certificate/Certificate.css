@@ -61,12 +61,18 @@
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    height: 220px;
+    height: 130px;
     margin-top: 20px;
 }
 
+#certificate_inputs-container div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 #certificate_inputs-container input {
-    width: 50%;
+    width: 48%;
     height: 35px;
     border: 0.5px solid rgb(199, 199, 199);
     padding: 0 0px 0 15px;
@@ -81,4 +87,5 @@
     background-color: #06ca21;
     border: none;
     font-size: 14px;
+    cursor: pointer;
 }

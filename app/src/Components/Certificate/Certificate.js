@@ -8,22 +8,28 @@ export default class Certificate extends React.Component {
         super();
 
         this.state = {
-            certificateInfo: {}
+            certificateInfo: {},
+            nameOfRedeemer: '',
+            currentDate: '',
+            currentTime: '',
+            storeNumber: ''
         }
     }
 
     componentDidMount() {
-
         if (this.props.location.query) {
             this.setState({
-                certificateInfo: this.props.location.query.certificateInfo
+                certificateInfo: this.props.location.query.certificateInfo,
+                index: this.props.location.query.index
             })
         } else {
-            let certificateInfo = purchasedCertificates.filter(certificate => {
-                return certificate.number === Number(this.props.match.params.certificate_number)
-            })
-            this.setState({
-                certificateInfo: certificateInfo[0]
+            let certificateInfo = purchasedCertificates.forEach((certificate, index) => {
+                if (certificate.number === Number(this.props.match.params.certificate_number)) {
+                    this.setState({
+                        certificateInfo: certificate,
+                        index: index
+                    })
+                }
             })
         }
     }
@@ -32,7 +38,12 @@ export default class Certificate extends React.Component {
         document.getElementById('certificate_inputs-container').style.display = 'flex';
     }
 
+    redeemCertificate = () => {
+        console.log(purchasedCertificates[this.state.index])
+    }
+
     render() {
+        console.log(this.state)
         let color = '#06ca21';
         if (this.state.certificateInfo.status === 'Redeemed')
             color = '#ce1616';
@@ -63,7 +74,7 @@ export default class Certificate extends React.Component {
                                 <i style={{ color: 'white', backgroundColor: '#09921c' }} className="fa fa-check fa-2x" />
                                 <h1>Redeem</h1>
                             </div> :
-                            <div disabled className='dashboard_buttons' style={{ backgroundColor: '#808080' }} >
+                            <div className='dashboard_buttons' style={{ backgroundColor: '#808080' }} >
                                 <i style={{ color: 'white', backgroundColor: '#3e3e3e' }} className="fa fa-check fa-2x" />
                                 <h1>Redeemed</h1>
                             </div>}
@@ -95,11 +106,11 @@ export default class Certificate extends React.Component {
                         <section className='certificate_information-container' style={{ height: '250px' }}>
                             {this.state.certificateInfo.status === 'Redeemed'
                                 ?
-                                <h1><i style={{ backgroundColor: '#09921c' }} className="fa fa-check fa-1x" />{this.state.certificateInfo.status} by {this.state.certificateInfo.nameOfRedemption}</h1>
+                                <h1><i style={{ backgroundColor: '#c71616' }} className="fa fa-check fa-1x" />{this.state.certificateInfo.status} by {this.state.certificateInfo.nameOfRedemption}</h1>
                                 :
                                 <h1><i style={{ backgroundColor: '#09921c' }} className="fas fa-shopping-cart fa-1x" />{this.state.certificateInfo.status}</h1>
                             }
-                            <h2 style={{margin: '20px 0 20px 0'}}>Buyer Information</h2>
+                            <h2 style={{ margin: '20px 0 20px 0' }}>Buyer Information</h2>
                             <h1><i style={{ backgroundColor: '#de9626' }} className="fa fa-user fa-1x" />{this.state.certificateInfo.nameOfBuyer}</h1>
                             <h1><i style={{ backgroundColor: '#1674c7', transform: 'rotate(90deg)' }} className="fa fa-phone fa-1x" />{this.state.certificateInfo.phoneNumber}</h1>
                             <h1><i style={{ backgroundColor: '#c71616' }} className="fa fa-envelope fa-1x" />{this.state.certificateInfo.email}</h1>
@@ -108,13 +119,17 @@ export default class Certificate extends React.Component {
                         </section>
                     </div>
 
-                            <div id='certificate_inputs-container'>
-                                <input placeholder='Name of Redeemer...' />
-                                <input placeholder='Date...' />
-                                <input placeholder='Time...' />
-                                <input placeholder='Store Number...' />
-                                <button>Redeem</button>
-                            </div>
+                    <div id='certificate_inputs-container'>
+                        <div>
+                            <input onChange={(input) => this.setState({ nameOfRedeemer: input.target.value })} placeholder='Full Name of Redeemer...' />
+                            <input onChange={(input) => this.setState({ storeNumber: input.target.value })} placeholder='Store Number...' />
+                        </div>
+                        <div>
+                            <input onChange={(input) => this.setState({ currentDate: input.target.value })} placeholder='Date...' />
+                            <input onChange={(input) => this.setState({ currentTime: input.target.value })} placeholder='Time...' />
+                        </div>
+                        <button onClick={() => this.redeemCertificate()}>Redeem</button>
+                    </div>
                 </div>
             </div>
         )

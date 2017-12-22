@@ -98,7 +98,7 @@ export default class Dashboard extends React.Component {
       let color = '#06ca21'
       if (certificate.status === 'Redeemed') color = '#ce1616'
       return (
-        <Link key={index} to={{ pathname: '/certificate/' + certificate.number, query: { certificateInfo: certificate } }}>
+        <Link key={index} to={{ pathname: '/certificate/' + certificate.number, query: { certificateInfo: certificate, index: index } }}>
           <section
             style={{
               borderLeft: '4px solid ' + color
