@@ -39,7 +39,18 @@ export default class Certificate extends React.Component {
     }
 
     redeemCertificate = () => {
-        console.log(purchasedCertificates[this.state.index])
+        let newObj = Object.assign({}, purchasedCertificates[this.state.index])
+        newObj.nameOfRedemption = this.state.nameOfRedeemer;
+        newObj.storeRedeemed = this.state.storeNumber;
+        newObj.dateRedeemed = this.state.currentDate;
+        newObj.timeRedeemed = this.state.currentTime;
+        newObj.status = 'Redeemed';
+        console.log(newObj);
+        purchasedCertificates[this.state.index] = newObj;
+        this.setState({
+            certificateInfo: newObj
+        })
+        document.getElementById('certificate_inputs-container').style.display = 'none';
     }
 
     render() {
@@ -106,7 +117,11 @@ export default class Certificate extends React.Component {
                         <section className='certificate_information-container' style={{ height: '250px' }}>
                             {this.state.certificateInfo.status === 'Redeemed'
                                 ?
-                                <h1><i style={{ backgroundColor: '#c71616' }} className="fa fa-check fa-1x" />{this.state.certificateInfo.status} by {this.state.certificateInfo.nameOfRedemption}</h1>
+                                <div className='certificate_information-container' style={{height: '90px'}}>
+                                    <h1><i style={{ backgroundColor: '#c71616' }} className="fa fa-check fa-1x" />{this.state.certificateInfo.status} by {this.state.certificateInfo.nameOfRedemption}</h1>
+                                    <h1><i style={{ backgroundColor: '#16c7b8' }} className="fa fa-clock fa-1x" />{this.state.certificateInfo.dateRedeemed} - {this.state.certificateInfo.timeRedeemed}</h1>
+                                    <h1><i style={{ backgroundColor: '#9e2020' }} className="fa fa-home fa-1x" />{this.state.certificateInfo.storeRedeemed}</h1>
+                                </div>
                                 :
                                 <h1><i style={{ backgroundColor: '#09921c' }} className="fas fa-shopping-cart fa-1x" />{this.state.certificateInfo.status}</h1>
                             }
@@ -114,19 +129,33 @@ export default class Certificate extends React.Component {
                             <h1><i style={{ backgroundColor: '#de9626' }} className="fa fa-user fa-1x" />{this.state.certificateInfo.nameOfBuyer}</h1>
                             <h1><i style={{ backgroundColor: '#1674c7', transform: 'rotate(90deg)' }} className="fa fa-phone fa-1x" />{this.state.certificateInfo.phoneNumber}</h1>
                             <h1><i style={{ backgroundColor: '#c71616' }} className="fa fa-envelope fa-1x" />{this.state.certificateInfo.email}</h1>
-                            <h1><i style={{ backgroundColor: '#16c7b8' }} className="fa fa-clock fa-1x" />{this.state.certificateInfo.dateRedeemed} - {this.state.certificateInfo.timeRedeemed}</h1>
-                            <h1><i style={{ backgroundColor: '#9e2020' }} className="fa fa-home fa-1x" />{this.state.certificateInfo.storeRedeemed}</h1>
                         </section>
                     </div>
 
                     <div id='certificate_inputs-container'>
-                        <div>
-                            <input onChange={(input) => this.setState({ nameOfRedeemer: input.target.value })} placeholder='Full Name of Redeemer...' />
-                            <input onChange={(input) => this.setState({ storeNumber: input.target.value })} placeholder='Store Number...' />
-                        </div>
-                        <div>
-                            <input onChange={(input) => this.setState({ currentDate: input.target.value })} placeholder='Date...' />
-                            <input onChange={(input) => this.setState({ currentTime: input.target.value })} placeholder='Time...' />
+                        <div style={{ display: 'flex' }}>
+                            <div>
+                                <section>
+                                    <h1>Ex: Jody Sunderland</h1>
+                                    <input onChange={(input) => this.setState({ nameOfRedeemer: input.target.value })} placeholder='Full Name of Redeemer...' />
+                                </section>
+
+                                <section>
+                                    <h1>Ex: #456</h1>
+                                    <input onChange={(input) => this.setState({ storeNumber: input.target.value })} placeholder='Store Number...' />
+                                </section>
+                            </div>
+                            <div>
+                                <section>
+                                    <h1>Ex: 12/21/2018</h1>
+                                    <input onChange={(input) => this.setState({ currentDate: input.target.value })} placeholder='Date...' />
+                                </section>
+
+                                <section>
+                                    <h1>Ex: 2:30pm</h1>
+                                    <input onChange={(input) => this.setState({ currentTime: input.target.value })} placeholder='Time...' />
+                                </section>
+                            </div>
                         </div>
                         <button onClick={() => this.redeemCertificate()}>Redeem</button>
                     </div>

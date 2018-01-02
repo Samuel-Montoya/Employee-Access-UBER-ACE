@@ -11,7 +11,7 @@
 }
 
 .certificate_product-container {
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(243, 243, 243);
     font-size: 18px;
     border-radius: 2px;
     display: flex;
@@ -61,21 +61,41 @@
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    height: 130px;
     margin-top: 20px;
 }
 
-#certificate_inputs-container div {
-    width: 100%;
+#certificate_inputs-container div div {
+    width: 50%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+#certificate_inputs-container div section {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#certificate_inputs-container div div:nth-child(2) input {
+    float: right;
+}
+#certificate_inputs-container div div:nth-child(2) h1 {
+    width: 95%;
+    float: right;
+}
+
+#certificate_inputs-container div div section h1 {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: lightgray;
 }
 
 #certificate_inputs-container input {
-    width: 48%;
+    width: 95%;
     height: 35px;
     border: 0.5px solid rgb(199, 199, 199);
-    padding: 0 0px 0 15px;
+    padding: 0 0px 0 8px;
     box-sizing: border-box;
     font-size: 14px;
 }
