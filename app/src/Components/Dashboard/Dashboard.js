@@ -1,5 +1,6 @@
 import React from 'react'
 import './Dashboard.css'
+import Header from '../Header/Header';
 import { purchasedCertificates } from '../../PurchasedCertificates'
 import { Link } from 'react-router-dom'
 
@@ -43,6 +44,10 @@ export default class Dashboard extends React.Component {
     }
   }
 
+  expandCertificate = (id) => {
+    document.getElementById(id).style.height = '200px'
+  }
+
   render() {
     return (
       <div className='dashboard_container'>
@@ -58,18 +63,18 @@ export default class Dashboard extends React.Component {
 
         <div className='dashboard_buttons-container'>
 
-          <div style={{ backgroundColor: '#2780da' }} className='dashboard_buttons' onClick={() => this.updateCertificates('All')}>
-            <i style={{ color: 'white', backgroundColor: '#1b5691' }} className="fas fa-list-ul fa-2x" />
+          <div onClick={() => this.updateCertificates('All')}>
+            <i className="fas fa-list-ul fa-2x" />
             <h1>All Certificates</h1>
           </div>
 
-          <div className='dashboard_buttons' style={{ backgroundColor: '#06ca21' }} onClick={() => this.updateCertificates('Redeemable')}>
-            <i style={{ color: 'white', backgroundColor: '#09921c' }} className="fas fa-shopping-cart fa-2x" />
+          <div onClick={() => this.updateCertificates('Redeemable')}>
+            <i className="fas fa-shopping-cart fa-2x" />
             <h1>Redeemable</h1>
           </div>
 
-          <div style={{ backgroundColor: '#de262c' }} className='dashboard_buttons' onClick={() => this.updateCertificates('Redeemed')}>
-            <i style={{ color: 'white', backgroundColor: '#af262a' }} className="fas fa-check fa-2x" />
+          <div onClick={() => this.updateCertificates('Redeemed')}>
+            <i className="fas fa-check fa-2x" />
             <h1>Redeemed</h1>
           </div>
 
