@@ -23,7 +23,7 @@ export default class Certificate extends React.Component {
                 index: this.props.location.query.index
             })
         } else {
-            let certificateInfo = purchasedCertificates.forEach((certificate, index) => {
+            purchasedCertificates.forEach((certificate, index) => {
                 if (certificate.number === Number(this.props.match.params.certificate_number)) {
                     this.setState({
                         certificateInfo: certificate,

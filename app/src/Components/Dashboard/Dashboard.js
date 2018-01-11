@@ -2,7 +2,7 @@ import React from 'react'
 import './Dashboard.css'
 import Header from '../Header/Header';
 import { purchasedCertificates } from '../../PurchasedCertificates'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 export default class Dashboard extends React.Component {
   constructor() {
@@ -44,93 +44,42 @@ export default class Dashboard extends React.Component {
     }
   }
 
-  expandCertificate = (id) => {
-    document.getElementById(id).style.height = '200px'
-  }
-
   render() {
     return (
       <div className='dashboard_container'>
-        <header className='dashboard_header'>
-          <Link to='/dashboard'>
-            <img src='http://www.jiffylubesocal.com/wp-content/themes/jiffy/images/main-logo.png' alt='' />
-          </Link>
-
-          <Link to='/login'>
-            <h1>Log Out</h1>
-          </Link>
-        </header>
-
-        <div className='dashboard_buttons-container'>
-
-          <div onClick={() => this.updateCertificates('All')}>
-            <i className="fas fa-list-ul fa-2x" />
-            <h1>All Certificates</h1>
+        <Header />
+        <section>
+          <div className='dashboard_search-container'>
+            <h1>Search for a Certificate</h1>
+            <section>
+              <input onChange={(input) => { if (input.target.value) { this.setState({ searchText: input.target.value }) } else this.setState({ certificatesToDisplay: purchasedCertificates }) }} placeholder='Search...' />
+              <select onChange={(input) => this.setState({ searchFilter: input.target.value })}>
+                <option value="number">Certificate Number</option>
+                <option value="email">Email</option>
+                <option value="nameOfBuyer">Name</option>
+                <option value="phoneNumber">Phone Number</option>
+              </select>
+            </section>
+            <hr />
+            <button onClick={() => this.filterCertificates()}>Search</button>
           </div>
 
-          <div onClick={() => this.updateCertificates('Redeemable')}>
-            <i className="fas fa-shopping-cart fa-2x" />
-            <h1>Redeemable</h1>
+          <div className='dashboard_certificate-container'>
+            {this.allCertificates()}
           </div>
-
-          <div onClick={() => this.updateCertificates('Redeemed')}>
-            <i className="fas fa-check fa-2x" />
-            <h1>Redeemed</h1>
-          </div>
-
-        </div>
-
-        <div className='dashboard_search-container'>
-          <input onChange={(input) => { if (input.target.value) { this.setState({ searchText: input.target.value }) } else this.setState({ certificatesToDisplay: purchasedCertificates }) }} placeholder='Search...' />
-          <button onClick={() => this.filterCertificates()}>Search</button>
-          <select onChange={(input) => this.setState({ searchFilter: input.target.value })}>
-            <option value="number">Certificate Number</option>
-            <option value="email">Email</option>
-            <option value="nameOfBuyer">Name</option>
-            <option value="phoneNumber">Phone Number</option>
-          </select>
-        </div>
-
-        <div className='dashboard_certificate-container'>
-          {this.allCertificates()}
-        </div>
+        </section>
       </div>
     )
   }
 
   allCertificates = () => {
-    return this.state.certificatesToDisplay.map((certificate, index) => {
-      let color = '#06ca21'
-      if (certificate.status === 'Redeemed') color = '#ce1616'
-      return (
-        <Link key={index} to={{ pathname: '/certificate/' + certificate.number, query: { certificateInfo: certificate, index: index } }}>
-          <section
-            style={{
-              borderLeft: '4px solid ' + color
-            }}
-            className='dashboard_certificate-contents-container'>
-            <section className='certificate_header'>
-              <h1>{certificate.title}</h1>
-              <h1>#{certificate.number}</h1>
-            </section>
+    if (this.state.certificatesToDisplay.length) {
+      return this.state.certificatesToDisplay.map((certificate, index) => {
+        return (
+          <div key={index}>
 
-            <section className='certificate_contents'>
-              <h1
-                style={{
-                  color: color
-                }}>
-                {certificate.status}
-              </h1>
-              {certificate.status === 'Redeemed'
-                ? <h1>
-                  Time Of Redemption: {certificate.dateRedeemed} - {certificate.timeRedeemed} ({certificate.storeRedeemed})
-                  </h1>
-                : <h1>{certificate.nameOfBuyer} - {certificate.phoneNumber}</h1>}
-              <h2 style={{ textDecoration: 'underline' }}>Click for details</h2>
-            </section>
-          </section>
-        </Link>
-      )
-    })
+          </div>)
+      })
+    }
   }
 }

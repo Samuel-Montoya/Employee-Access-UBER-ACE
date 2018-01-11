@@ -77,9 +77,16 @@
     height: 60px;
     background-color: #812440;
     position: absolute;
+    margin: auto;
     bottom: 0;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .login_page_footer { 
+        position: inherit;
+    }
+ }
