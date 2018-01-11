@@ -9,23 +9,9 @@ export default class Dashboard extends React.Component {
     super()
 
     this.state = {
-      certificatesToDisplay: purchasedCertificates,
+      certificatesToDisplay: [],
       searchFilter: 'number',
       searchText: ''
-    }
-  }
-
-  updateCertificates = type => {
-    if (type !== 'All') {
-      this.setState({
-        certificatesToDisplay: purchasedCertificates.filter(function (
-          certificate
-        ) {
-          return certificate.status === type
-        })
-      })
-    } else {
-      this.setState({ certificatesToDisplay: purchasedCertificates })
     }
   }
 
@@ -33,26 +19,27 @@ export default class Dashboard extends React.Component {
     if (this.state.searchText) {
       this.setState({
         certificatesToDisplay: purchasedCertificates.filter((certificate) => {
-          if (this.state.searchFilter !== 'number')
+          if (this.state.searchFilter !== 'number'){
             return certificate[this.state.searchFilter].toLowerCase().includes(this.state.searchText.toLowerCase());
+          }
           else
             return certificate[this.state.searchFilter] === Number(this.state.searchText);
         })
       })
     } else {
-      this.setState({ certificatesToDisplay: purchasedCertificates })
+      this.setState({ certificatesToDisplay: [] })
     }
   }
 
   render() {
     return (
-      <div className='dashboard_container'>
+      <div >
         <Header />
-        <section>
+        <section className='dashboard_container'>
           <div className='dashboard_search-container'>
             <h1>Search for a Certificate</h1>
             <section>
-              <input onChange={(input) => { if (input.target.value) { this.setState({ searchText: input.target.value }) } else this.setState({ certificatesToDisplay: purchasedCertificates }) }} placeholder='Search...' />
+              <input onChange={(input) => { if (input.target.value) { this.setState({ searchText: input.target.value }) } else this.setState({ searchText: '', certificatesToDisplay: [] }) }} placeholder='Search...' />
               <select onChange={(input) => this.setState({ searchFilter: input.target.value })}>
                 <option value="number">Certificate Number</option>
                 <option value="email">Email</option>
@@ -64,7 +51,15 @@ export default class Dashboard extends React.Component {
             <button onClick={() => this.filterCertificates()}>Search</button>
           </div>
 
-          <div className='dashboard_certificate-container'>
+          <div className='dashboard_results_container'>
+            <h1>Search Results</h1>
+            <section>
+              <h1>TITLE</h1>
+              <h2>STATUS</h2>
+              <h3>BUYER NAME</h3>
+              <h4>CERTIFICATE #</h4>
+              <h5>INFO</h5>
+            </section>
             {this.allCertificates()}
           </div>
         </section>
@@ -75,9 +70,19 @@ export default class Dashboard extends React.Component {
   allCertificates = () => {
     if (this.state.certificatesToDisplay.length) {
       return this.state.certificatesToDisplay.map((certificate, index) => {
+        let color = '#4ED767';
+        let icon = 'fa fa-check-circle fa-2x';
+        if (certificate.status === 'Redeemed') {
+          color = '#D74E4E'; 
+          icon = 'fa fa-times-circle fa-2x';
+        }
         return (
-          <div key={index}>
-
+          <div key={index} className='dashboard_certificate_container'>
+            <h1>{certificate.title}</h1>
+            <h2 style={{ fontWeight: 'bolder', color: color }}>{certificate.status}</h2>
+            <h3>{certificate.nameOfBuyer}</h3>
+            <h4>{certificate.number}</h4>
+            <i className={icon} style={{ color: color }} />
           </div>)
       })
     }
