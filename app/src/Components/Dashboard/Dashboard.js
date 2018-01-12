@@ -2,7 +2,7 @@ import React from 'react'
 import './Dashboard.css'
 import Header from '../Header/Header';
 import { purchasedCertificates } from '../../PurchasedCertificates'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class Dashboard extends React.Component {
   constructor() {
@@ -19,7 +19,7 @@ export default class Dashboard extends React.Component {
     if (this.state.searchText) {
       this.setState({
         certificatesToDisplay: purchasedCertificates.filter((certificate) => {
-          if (this.state.searchFilter !== 'number'){
+          if (this.state.searchFilter !== 'number') {
             return certificate[this.state.searchFilter].toLowerCase().includes(this.state.searchText.toLowerCase());
           }
           else
@@ -33,7 +33,7 @@ export default class Dashboard extends React.Component {
 
   render() {
     return (
-      <div >
+      <div>
         <Header />
         <section className='dashboard_container'>
           <div className='dashboard_search-container'>
@@ -73,17 +73,19 @@ export default class Dashboard extends React.Component {
         let color = '#4ED767';
         let icon = 'fa fa-check-circle fa-2x';
         if (certificate.status === 'Redeemed') {
-          color = '#D74E4E'; 
+          color = '#D74E4E';
           icon = 'fa fa-times-circle fa-2x';
         }
         return (
-          <div key={index} className='dashboard_certificate_container'>
-            <h1>{certificate.title}</h1>
-            <h2 style={{ fontWeight: 'bolder', color: color }}>{certificate.status}</h2>
-            <h3>{certificate.nameOfBuyer}</h3>
-            <h4>{certificate.number}</h4>
-            <i className={icon} style={{ color: color }} />
-          </div>)
+          <Link key={index} to={{ pathname: '/certificate/' + certificate.number, query: { certificateInfo: certificate, index: index } }}>
+            <div className='dashboard_certificate_container'>
+              <h1>{certificate.title}</h1>
+              <h2 style={{ fontWeight: 'bolder', color: color }}>{certificate.status}</h2>
+              <h3>{certificate.nameOfBuyer}</h3>
+              <h4>{certificate.number}</h4>
+              <i className={icon} style={{ color: color }} />
+            </div>
+          </Link>)
       })
     }
   }

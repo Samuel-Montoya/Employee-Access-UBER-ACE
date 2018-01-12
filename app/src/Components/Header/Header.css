@@ -6,6 +6,7 @@
     justify-content: space-between;
     position: fixed;
     box-shadow: 1px 1px 1px 1px rgb(80, 7, 29);
+    z-index: 10;
 }
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
@@ -14,7 +15,6 @@
     }
  }
 
-  
 .logo_container {
     height: 100%;
     display: flex;

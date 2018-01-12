@@ -2,6 +2,7 @@ import React from 'react';
 import './Certificate.css';
 import { Link } from 'react-router-dom';
 import { purchasedCertificates } from '../../PurchasedCertificates';
+import Header from '../Header/Header';
 
 export default class Certificate extends React.Component {
     constructor() {
@@ -45,7 +46,6 @@ export default class Certificate extends React.Component {
         newObj.dateRedeemed = this.state.currentDate;
         newObj.timeRedeemed = this.state.currentTime;
         newObj.status = 'Redeemed';
-        console.log(newObj);
         purchasedCertificates[this.state.index] = newObj;
         this.setState({
             certificateInfo: newObj
@@ -54,111 +54,184 @@ export default class Certificate extends React.Component {
     }
 
     render() {
-        console.log(this.state)
-        let color = '#06ca21';
-        if (this.state.certificateInfo.status === 'Redeemed')
-            color = '#ce1616';
         return (
-            <div className='dashboard_container'>
-                <header className='dashboard_header'>
-                    <Link to='/dashboard'>
-                        <img src='http://www.jiffylubesocal.com/wp-content/themes/jiffy/images/main-logo.png' alt='' />
-                    </Link>
-                    <Link to='/login'>
-                        <h1>Log Out</h1>
-                    </Link>
-                </header>
-
-                <div className='certificate_page-container'>
-
-                    <div className='certificate_buttons-container'>
-
-                        <Link to='/dashboard'>
-                            <div style={{ backgroundColor: '#989898' }} className='dashboard_buttons' >
-                                <i style={{ color: 'white', backgroundColor: '#5f5f5f' }} className="fa fa-angle-left fa-2x" />
-                                <h1>Go Back</h1>
+            <div>
+                <Header />
+                <div className='cert_page_container'>
+                    <section className='cert_header_container'>
+                        <Link to='/dashboard' style={{ height: '100%' }}>
+                            <div>
+                                <img src='https://www.materialui.co/materialIcons/navigation/arrow_back_white_192x192.png' alt='' />
+                                <h1>BACK</h1>
                             </div>
                         </Link>
+                        <h1>CERTIFICATE #{this.state.certificateInfo.number}</h1>
+                    </section>
 
-                        {this.state.certificateInfo.status === 'Redeemable' ?
-                            <div disabled className='dashboard_buttons' style={{ backgroundColor: '#06ca21' }} onClick={() => this.displayInputs()} >
-                                <i style={{ color: 'white', backgroundColor: '#09921c' }} className="fa fa-check fa-2x" />
-                                <h1>Redeem</h1>
-                            </div> :
-                            <div className='dashboard_buttons' style={{ backgroundColor: '#808080' }} >
-                                <i style={{ color: 'white', backgroundColor: '#3e3e3e' }} className="fa fa-check fa-2x" />
-                                <h1>Redeemed</h1>
-                            </div>}
+                    <section className='cert_information_container'>
+                        <header>
+                            <h1>CERTIFICATE INFORMATION</h1>
+                            <h2>#{this.state.certificateInfo.number}</h2>
+                        </header>
 
+                        <div className='cert_information_content_container'>
+                            <section className='cert_info_title_container'>
+                                <h1>TITLE</h1>
+                                <h2>{this.state.certificateInfo.title}</h2>
+                            </section>
 
+                            <section className='cert_info_status_container'>
+                                <h1>STATUS</h1>
+                                <h2>{this.state.certificateInfo.status}</h2>
+                            </section>
 
-                        <div style={{ backgroundColor: '#de9626' }} className='dashboard_buttons' >
-                            <i style={{ color: 'white', backgroundColor: '#c78216' }} className="fa fa-user fa-2x" />
-                            <h1>View Profile</h1>
+                            <section className='cert_info_purchase_container'>
+                                <h1>PURCHASE DATE</h1>
+                                <h2>{this.state.certificateInfo.datePurchased}</h2>
+                            </section>
+
+                            <section className='cert_info_expiration_container'>
+                                <h1>EXPIRATION DATE</h1>
+                                <h2>12/04/2018</h2>
+                            </section>
                         </div>
 
-                    </div>
+                        <div className='cert_buyer_information_content_container'>
+                            <section className='cert_buyer_description_container'>
+                                <h1>PRODUCT DESCRIPTION</h1>
+                                <p>Nulla sollicitudin, diam eu cursus sollicitudin, libero quam tristique turpis, cursus consectetur nibh magna nec lectus. Nunc faucibus ut orci id efficitur.</p>
+                            </section>
 
-                    <div className='certificate_product-container' style={{ borderLeft: '3px solid ' + color }}>
-                        <section className='certificate_product-header'>
-                            <h2>{this.state.certificateInfo.title}</h2>
-                            <h1>#{this.state.certificateInfo.number}</h1>
-                        </section>
-                        <hr className='certificate_header-underline' />
-                        <section className='certificate_information-container'>
-                            <h1>- ${this.state.certificateInfo.price}</h1>
-                            <h1>- Expires on: 10/08/2018</h1>
-                            <h1>- Purchased on: {this.state.certificateInfo.datePurchased}</h1>
-                            <h1><span style={{ fontWeight: 'bold' }}>Product Description: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum eu facilisis sed odio morbi.</h1>
-                        </section>
-
-                        <h2 style={{ marginTop: '25px' }}>Certificate Status</h2>
-                        <hr className='certificate_header-underline' />
-                        <section className='certificate_information-container' style={{ height: '250px' }}>
-                            {this.state.certificateInfo.status === 'Redeemed'
-                                ?
-                                <div className='certificate_information-container' style={{height: '90px'}}>
-                                    <h1><i style={{ backgroundColor: '#c71616' }} className="fa fa-check fa-1x" />{this.state.certificateInfo.status} by {this.state.certificateInfo.nameOfRedemption}</h1>
-                                    <h1><i style={{ backgroundColor: '#16c7b8' }} className="fa fa-clock fa-1x" />{this.state.certificateInfo.dateRedeemed} - {this.state.certificateInfo.timeRedeemed}</h1>
-                                    <h1><i style={{ backgroundColor: '#9e2020' }} className="fa fa-home fa-1x" />{this.state.certificateInfo.storeRedeemed}</h1>
-                                </div>
-                                :
-                                <h1><i style={{ backgroundColor: '#09921c' }} className="fas fa-shopping-cart fa-1x" />{this.state.certificateInfo.status}</h1>
-                            }
-                            <h2 style={{ margin: '20px 0 20px 0' }}>Buyer Information</h2>
-                            <h1><i style={{ backgroundColor: '#de9626' }} className="fa fa-user fa-1x" />{this.state.certificateInfo.nameOfBuyer}</h1>
-                            <h1><i style={{ backgroundColor: '#1674c7', transform: 'rotate(90deg)' }} className="fa fa-phone fa-1x" />{this.state.certificateInfo.phoneNumber}</h1>
-                            <h1><i style={{ backgroundColor: '#c71616' }} className="fa fa-envelope fa-1x" />{this.state.certificateInfo.email}</h1>
-                        </section>
-                    </div>
-
-                    <div id='certificate_inputs-container'>
-                        <div style={{ display: 'flex' }}>
-                            <div>
-                                <section>
-                                    <h1>Ex: Jody Sunderland</h1>
-                                    <input onChange={(input) => this.setState({ nameOfRedeemer: input.target.value })} placeholder='Full Name of Redeemer...' />
-                                </section>
-
-                                <section>
-                                    <h1>Ex: #456</h1>
-                                    <input onChange={(input) => this.setState({ storeNumber: input.target.value })} placeholder='Store Number...' />
-                                </section>
-                            </div>
-                            <div>
-                                <section>
-                                    <h1>Ex: 12/21/2018</h1>
-                                    <input onChange={(input) => this.setState({ currentDate: input.target.value })} placeholder='Date...' />
-                                </section>
-
-                                <section>
-                                    <h1>Ex: 2:30pm</h1>
-                                    <input onChange={(input) => this.setState({ currentTime: input.target.value })} placeholder='Time...' />
-                                </section>
-                            </div>
+                            <section className='cert_buyer_coupon_container'>
+                                <h1>COUPON CODE</h1>
+                                <p>#53193</p>
+                            </section>
                         </div>
-                        <button onClick={() => this.redeemCertificate()}>Redeem</button>
-                    </div>
+                    </section>
+
+                    <section className='cert_buyer_container' style={{ marginBottom: 0 }}>
+                        <header>
+                            <h1>BUYER INFORMATION</h1>
+                        </header>
+
+                        <div>
+                            <section>
+                                <h1>FULL NAME</h1>
+                                <h2>{this.state.certificateInfo.nameOfBuyer}</h2>
+                            </section>
+
+                            <section>
+                                <h1>EMAIL</h1>
+                                <h2>{this.state.certificateInfo.email}</h2>
+                            </section>
+
+                            <section>
+                                <h1>PHONE</h1>
+                                <h2>{this.state.certificateInfo.phoneNumber}</h2>
+                            </section>
+                        </div>
+
+                    </section>
+
+                    <section className='cert_buyer_container' style={{ marginBottom: '0' }}>
+                        <header>
+                            <h1>REDEEMER INFORMATION</h1>
+                        </header>
+
+                        <div>
+                            <section>
+                                <h1>FULL NAME</h1>
+                                <h2>{this.state.certificateInfo.nameOfRedemption}</h2>
+                            </section>
+
+                            <section>
+                                <h1>STORE</h1>
+                                <h2>{this.state.certificateInfo.storeRedeemed}</h2>
+                            </section>
+
+                            <section>
+                                <h1>WHEN</h1>
+                                <h2>{this.state.certificateInfo.dateRedeemed} - {this.state.certificateInfo.timeRedeemed}</h2>
+                            </section>
+                        </div>
+                    </section>
+
+                    <section className='cert_buyer_container'>
+                        <header>
+                            <h1>UNREDEEMED HISTORY</h1>
+                            <h2>HIDE</h2>
+                        </header>
+
+                        <div className='cert_unredeemed_container'>
+                            <section>
+                                <h1>FULL NAME</h1>
+                                <h2>{this.state.certificateInfo.nameOfRedemption}</h2>
+                            </section>
+
+                            <section>
+                                <h1>STORE</h1>
+                                <h2>{this.state.certificateInfo.storeRedeemed}</h2>
+                            </section>
+
+                            <section>
+                                <h1>WHEN</h1>
+                                <h2>{this.state.certificateInfo.dateRedeemed} - {this.state.certificateInfo.timeRedeemed}</h2>
+                            </section>
+                        </div>
+
+                        <div className='cert_unredeemed_container'>
+                            <section>
+                                <h1>FULL NAME</h1>
+                                <h2>{this.state.certificateInfo.nameOfRedemption}</h2>
+                            </section>
+
+                            <section>
+                                <h1>STORE</h1>
+                                <h2>{this.state.certificateInfo.storeRedeemed}</h2>
+                            </section>
+
+                            <section>
+                                <h1>WHEN</h1>
+                                <h2>{this.state.certificateInfo.dateRedeemed} - {this.state.certificateInfo.timeRedeemed}</h2>
+                            </section>
+                        </div>
+                    </section>
+
+                    <section className='cert_button_container'>
+                        <button style={{ backgroundColor: '#42EA1A' }}>Redeem Certificate</button>
+                        <button style={{ backgroundColor: '#65B3FF' }}>View Profile</button>
+                    </section>
+
+                    <section className='cert_buyer_container cert_redeeminfo_container'>
+                        <header>
+                            <h1>REDEEM INFO</h1>
+                        </header>
+
+                        <section className='cert_redeeminfo_content_container'>
+                            <div>
+                                <h1>FULL NAME</h1>
+                                <input placeholder='James Sunderland...' />
+                            </div>
+
+                            <div>
+                                <h1>STORE</h1>
+                                <input placeholder='James Sunderland...' />
+                            </div>
+                        </section>
+
+
+                        <section className='cert_redeeminfo_content_container'>
+                            <div>
+                                <h1>DATE</h1>
+                                <input placeholder='James Sunderland...' />
+                            </div>
+                            
+                            <div>
+                                <h1>TIME</h1>
+                                <input placeholder='James Sunderland...' />
+                            </div>
+                        </section>
+                    </section>
                 </div>
             </div>
         )

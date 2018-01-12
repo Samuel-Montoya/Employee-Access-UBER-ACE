@@ -1,111 +1,173 @@
-.certificate_page-container {
-    margin-top: 100px;
-    width: 650px;
+.cert_page_container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.certificate_buttons-container {
-    width: 100%;
+.cert_header_container {
+    width: 1200px;
+    height: 60px;
     display: flex;
-    justify-content: space-between;
+    margin-top: 150px;
     margin-bottom: 20px;
+    position: relative;
 }
 
-.certificate_product-container {
-    background-color: rgb(243, 243, 243);
+.cert_header_container div {
+    width: 150px;
+    height: 80%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    position: absolute;
     font-size: 18px;
-    border-radius: 2px;
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
+    color: white;
+    background-color: rgb(95, 0, 29);
 }
 
-.certificate_product-header {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        font-size: 20px;
-        font-weight: bolder;
+.cert_header_container div img {
+    width: 25%;
+    height: 80%;
+    margin: 0 20px 0 10px;
 }
 
-.certificate_product-container h2 {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.certificate_product-container h1 {
-    color: rgb(53, 53, 53);
-}
-
-.certificate_header-underline {
+.cert_header_container > h1 {
     width: 100%;
-    margin-bottom: 15px;
-    border-style: solid;
-    border: 1px solid rgb(143, 143, 143);
+    font-size: 34px;
+    color: rgb(43, 43, 43);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.certificate_information-container {
+.cert_information_container, .cert_buyer_container {
+    width: 1200px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 140px;
+    align-items: center;
+    border: 2px solid #8E0E34;
+    box-shadow: 2px 2px 5px rgb(163, 163, 163);
+    margin-bottom: 40px;
 }
 
-.certificate_information-container i {
+.cert_information_container header, .cert_buyer_container header {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    color: white;
+    background-color: #8E0E34;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.cert_information_container header h2, .cert_buyer_container header h2 {
+    position: absolute;
+    right: 0;
     margin-right: 10px;
-    border-radius: 2px;
-    padding: 3px;
-    color: white;
 }
 
-#certificate_inputs-container {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
+.cert_information_container div, .cert_buyer_container div {
+    width: 95%;
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.cert_information_content_container section, .cert_buyer_information_content_container section, .cert_buyer_container section {
+    font-size: 20px;
+    font-weight: bolder;
+    color: #8E0E34;
+}
+
+.cert_information_content_container section > h2, .cert_buyer_container section > h2 {
+    font-weight: lighter;
     margin-top: 20px;
+    color: rgb(43, 43, 43);
 }
 
-#certificate_inputs-container div div {
+.cert_info_title_container {
+    width: 40%;
+}
+.cert_info_status_container {
+    width: 20%;
+}
+.cert_info_purchase_container {
+    width: 20%;
+}
+.cert_info_expiration_container {
+    width: 20%;
+}
+
+.cert_buyer_information_content_container {
+    width: 100%;
+}
+
+.cert_buyer_information_content_container section > p {
+    font-weight: lighter;
+    margin-top: 20px;
+    color: rgb(43, 43, 43);
+}
+
+.cert_buyer_description_container {
     width: 50%;
+    margin-right: 10%;
+}
+
+.cert_buyer_coupon_container {
+    width: 25%;
+}
+
+.cert_buyer_container div {
+    width: 95%;
+}
+
+.cert_buyer_container div section {
+    width: 33.33%;
+    text-align: center;
+}
+
+.cert_unredeemed_container section {
+    margin-bottom: 40px;
+}
+.cert_unredeemed_container {
+    border-bottom: 1px solid #8E0E34;
+}
+
+.cert_button_container {
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.cert_button_container button {
+    border: none;
+    width: 30%;
+    height: 60px;
+    font-size: 18px;
+    color: white;
+    font-weight: bolder;
+}
+
+.cert_redeeminfo_container section {
+    background-color: lightblue;
+    display: flex;
+}
+
+.cert_redeeminfo_content_container div {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 15px;
 }
 
-#certificate_inputs-container div section {
+.cert_redeeminfo_content_container div input {
+    width: 90%;
+}
+
+.cert_redeeminfo_content_container {
+    background-color: lightslategray;
     width: 100%;
-    margin-bottom: 10px;
-}
-
-#certificate_inputs-container div div:nth-child(2) input {
-    float: right;
-}
-#certificate_inputs-container div div:nth-child(2) h1 {
-    width: 95%;
-    float: right;
-}
-
-#certificate_inputs-container div div section h1 {
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: lightgray;
-}
-
-#certificate_inputs-container input {
-    width: 95%;
-    height: 35px;
-    border: 0.5px solid rgb(199, 199, 199);
-    padding: 0 0px 0 8px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
-#certificate_inputs-container button {
-    height: 35px;
-    border-radius: 2px;
-    color: white;
-    background-color: #06ca21;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
 }
