@@ -8,12 +8,12 @@ export default class Header extends React.Component {
         return (
             <header className='header_container'>
                 <section className='logo_container'>
-                    <Link to='/dashboard'>
+                    <Link to='/search'>
                         <img
                             src='http://www.jiffylubesocal.com/wp-content/themes/jiffy/images/main-logo.png'
                             alt='' />
                     </Link>
-                    <h1>Pre-Paid Service Packs</h1>
+                    <h1>Employee Access</h1>
                 </section>
 
                 <section className='header_options'>

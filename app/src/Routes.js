@@ -7,7 +7,7 @@ import Certificate from './Components/Certificate/Certificate';
 export default(
     <Switch>
         <Route exact path='/login' component={Login}/>
-        <Route path='/dashboard' component={Dashboard} />
+        <Route path='/search' component={Dashboard} />
         <Route path='/certificate/:certificate_number' component={Certificate} />
     </Switch>
 )

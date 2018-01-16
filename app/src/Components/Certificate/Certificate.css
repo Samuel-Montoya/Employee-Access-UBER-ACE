@@ -24,6 +24,7 @@
     font-size: 18px;
     color: white;
     background-color: rgb(95, 0, 29);
+    border-radius: 2px;
 }
 
 .cert_header_container div img {
@@ -35,6 +36,7 @@
 .cert_header_container > h1 {
     width: 100%;
     font-size: 34px;
+    font-weight: bolder;
     color: rgb(43, 43, 43);
     display: flex;
     justify-content: center;
@@ -62,6 +64,7 @@
     background-color: #8E0E34;
     position: relative;
     margin-bottom: 40px;
+    font-size: 18px;
 }
 
 .cert_information_container header h2, .cert_buyer_container header h2 {
@@ -107,6 +110,7 @@
 
 .cert_buyer_information_content_container section > p {
     font-weight: lighter;
+    line-height: 30px;
     margin-top: 20px;
     color: rgb(43, 43, 43);
 }
@@ -129,6 +133,14 @@
     text-align: center;
 }
 
+#cert_undredeemed_controller {
+    display: none;
+}
+
+#cert_redeem_controller {
+    display: none;
+}
+
 .cert_unredeemed_container section {
     margin-bottom: 40px;
 }
@@ -141,21 +153,28 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
-.cert_button_container button {
+.cert_button_container button, .cert_redeemed_button {
     border: none;
     width: 30%;
     height: 60px;
     font-size: 18px;
     color: white;
     font-weight: bolder;
+    transition: all 0.3s ease;
+    border-radius: 2px;
 }
 
-.cert_redeeminfo_container section {
-    background-color: lightblue;
+.cert_page_container button:hover {
+    box-shadow: 0px -6px 0px rgba(0, 0, 0, 0.3) inset;
+}
+
+.cert_redeeminfo_content_container {
+    width: 95%;
     display: flex;
+    justify-content: space-between;
 }
 
 .cert_redeeminfo_content_container div {
@@ -165,9 +184,11 @@
 
 .cert_redeeminfo_content_container div input {
     width: 90%;
-}
-
-.cert_redeeminfo_content_container {
-    background-color: lightslategray;
-    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    font-size: 16px;
+    padding: 0 0 0 10px;
+    box-sizing: border-box;
+    border: 1px solid #8E0E34;
+    font-weight: bold;
 }

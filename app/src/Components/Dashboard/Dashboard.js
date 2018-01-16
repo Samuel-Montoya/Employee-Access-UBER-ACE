@@ -2,7 +2,8 @@ import React from 'react'
 import './Dashboard.css'
 import Header from '../Header/Header';
 import { purchasedCertificates } from '../../PurchasedCertificates'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { scroller } from 'react-scroll';
 
 export default class Dashboard extends React.Component {
   constructor() {
@@ -11,7 +12,8 @@ export default class Dashboard extends React.Component {
     this.state = {
       certificatesToDisplay: [],
       searchFilter: 'number',
-      searchText: ''
+      searchText: '',
+      hasSearched: false
     }
   }
 
@@ -24,8 +26,14 @@ export default class Dashboard extends React.Component {
           }
           else
             return certificate[this.state.searchFilter] === Number(this.state.searchText);
-        })
-      })
+        }),
+        hasSearched: true
+      }),
+      scroller.scrollTo('results_controller', {
+        duration: 700,
+        smooth: true,
+        ignoreCancelEvents: true
+    })
     } else {
       this.setState({ certificatesToDisplay: [] })
     }
@@ -51,7 +59,7 @@ export default class Dashboard extends React.Component {
             <button onClick={() => this.filterCertificates()}>Search</button>
           </div>
 
-          <div className='dashboard_results_container'>
+          <div className='dashboard_results_container' name='results_controller'>
             <h1>Search Results</h1>
             <section>
               <h1>TITLE</h1>
@@ -60,7 +68,7 @@ export default class Dashboard extends React.Component {
               <h4>CERTIFICATE #</h4>
               <h5>INFO</h5>
             </section>
-            {this.allCertificates()}
+            {this.state.hasSearched && this.state.certificatesToDisplay.length ? this.allCertificates() : <h1>Nothing Here...</h1>}
           </div>
         </section>
       </div>
