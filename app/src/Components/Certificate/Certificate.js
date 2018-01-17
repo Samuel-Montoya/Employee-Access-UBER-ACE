@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { purchasedCertificates } from '../../PurchasedCertificates';
 import Header from '../Header/Header';
 
+import {BackToSearch} from './CertificateComponents'
+
+
 export default class Certificate extends React.Component {
     constructor() {
         super();
@@ -14,7 +17,8 @@ export default class Certificate extends React.Component {
             currentDate: '',
             currentTime: '',
             storeNumber: 947,
-            customerName: ''
+            customerName: '',
+            displayBackToSearch: false
         }
     }
 
@@ -65,9 +69,10 @@ export default class Certificate extends React.Component {
         newObj.status = 'Redeemed';
         purchasedCertificates[this.state.index] = newObj;
         this.setState({
-            certificateInfo: newObj
+            certificateInfo: newObj,
+            isOpen: false,
+            displayBackToSearch: !this.state.displayBackToSearch
         })
-        document.getElementById('cert_redeem_notify_controller').style.display = 'flex';
         document.getElementById('cert_redeem_controller').style.display = 'none';
     }
 
@@ -82,12 +87,12 @@ export default class Certificate extends React.Component {
         this.setState({
             certificateInfo: newObj
         })
-        document.getElementById('cert_unredeem_notify_controller').style.display = 'none';
     }
 
     render() {
+        console.log(this.state)
         return (
-            <div>
+            <div style={{height: '100vh'}}>
                 <Header />
                 <div className='cert_page_container'>
                     <section className='cert_header_container'>
@@ -99,7 +104,6 @@ export default class Certificate extends React.Component {
                         </Link>
                         <h1>CERTIFICATE #{this.state.certificateInfo.number}</h1>
                     </section>
-
                     <section className='cert_button_container'>
                         {this.state.certificateInfo.status === 'Redeemable'
                             ?
@@ -151,12 +155,14 @@ export default class Certificate extends React.Component {
                         </section>
                     </div>
 
-                    <div id='cert_redeem_notify_controller' style={{ width: '1200px', display: 'none', flexDirection: 'column', alignItems: 'center', margin: '40px 0 60px 0' }}>
+                    {/* <div id='cert_redeem_notify_controller' style={{ width: '1200px', display: 'none', flexDirection: 'column', alignItems: 'center', margin: '40px 0 60px 0' }}>
                         <h1 style={{ marginBottom: '20px', fontSize: '30px', fontWeight: 'bold' }}>Certificate has been redeemed.</h1>
                         <Link style={{ width: '60%' }} to='/search'>
                             <button className='cert_redeemed_button' style={{ backgroundColor: '#960030', width: '100%', cursor: 'pointer' }}>Back To Search</button>
                         </Link>
-                    </div>
+                    </div> */}
+                    {this.state.displayBackToSearch && <BackToSearch />}
+                    
 
                     <div id='cert_unredeem_notify_controller' style={{ width: '1200px', display: 'none', alignItems: 'center', flexDirection: 'column', margin: '40px 0 60px 0' }}>
                         <h1 style={{fontSize: '30px', fontWeight: 'bold'}}>Are you sure you want to unredeem this certificate?</h1>
@@ -253,7 +259,7 @@ export default class Certificate extends React.Component {
 
                                 <section>
                                     <h1>STORE</h1>
-                                    <h2>{this.state.certificateInfo.storeRedeemed}</h2>
+                                    <h2>#{this.state.certificateInfo.storeRedeemed}</h2>
                                 </section>
 
                                 <section>

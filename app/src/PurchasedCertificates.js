@@ -14,7 +14,7 @@ module.exports = {
             nameOfRedemption: 'James Sunderland',
             dateRedeemed: '12/07/2017',
             timeRedeemed: '3:30pm',
-            storeRedeemed: '#967'
+            storeRedeemed: '967'
         },
         {
             number: 54262,
@@ -46,7 +46,7 @@ module.exports = {
             nameOfRedemption: 'Alessa Gillespie',
             dateRedeemed: '01/04/2017',
             timeRedeemed: '1:40pm',
-            storeRedeemed: '#969'
+            storeRedeemed: '969'
         },
         {
             number: 56734,
@@ -78,7 +78,7 @@ module.exports = {
             nameOfRedemption: 'Cheryl Mason',
             dateRedeemed: '10/20/2015',
             timeRedeemed: '5:25pm',
-            storeRedeemed: '#967'
+            storeRedeemed: '967'
         },
         {
             number: 58653,
@@ -94,7 +94,7 @@ module.exports = {
             nameOfRedemption: 'James Sunderland',
             dateRedeemed: '11/14/2016',
             timeRedeemed: '1:20pm',
-            storeRedeemed: '#968'
+            storeRedeemed: '968'
         },
         {
             number: 52345,
@@ -110,7 +110,7 @@ module.exports = {
             nameOfRedemption: 'Joshua Shepherd',
             dateRedeemed: '12/07/2017',
             timeRedeemed: '3:30pm',
-            storeRedeemed: '#969'
+            storeRedeemed: '969'
         },
         {
             number: 54743,
@@ -126,7 +126,7 @@ module.exports = {
             nameOfRedemption: 'Anne Cunningham',
             dateRedeemed: '12/07/2017',
             timeRedeemed: '3:30pm',
-            storeRedeemed: '#967'
+            storeRedeemed: '967'
         },
         {
             number: 54325,

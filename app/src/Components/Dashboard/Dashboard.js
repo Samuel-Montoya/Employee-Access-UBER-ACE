@@ -68,7 +68,7 @@ export default class Dashboard extends React.Component {
               <h4>CERTIFICATE #</h4>
               <h5>INFO</h5>
             </section>
-            {this.state.hasSearched && this.state.certificatesToDisplay.length ? this.allCertificates() : <h1>Nothing Here...</h1>}
+            {this.state.hasSearched && !this.state.certificatesToDisplay.length ? <h1>No Results...</h1> : this.allCertificates()}
           </div>
         </section>
       </div>

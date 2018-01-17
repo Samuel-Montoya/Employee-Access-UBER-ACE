@@ -18,7 +18,7 @@ export default class Login extends React.Component {
                         className='login_page_input password'
                         type='password'
                         placeholder='Password' />
-                    <Link to={{ pathname: '/dashboard', query: { the: 'query' } }}>
+                    <Link to={{ pathname: '/search', query: { the: 'query' } }}>
                         <button className='login_page_login-button'>Log In</button>
                     </Link>
                 </div>

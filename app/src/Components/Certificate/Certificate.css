@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(245, 245, 245);
+    min-height: 100%;
 }
 
 .cert_header_container {
@@ -45,12 +47,15 @@
 
 .cert_information_container, .cert_buyer_container {
     width: 1200px;
+    width: auto !important;
+    min-width: 1200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 2px solid #8E0E34;
     box-shadow: 2px 2px 5px rgb(163, 163, 163);
     margin-bottom: 40px;
+    background-color: white;
 }
 
 .cert_information_container header, .cert_buyer_container header {
