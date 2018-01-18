@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import JiffyLubeLogo from '../../resources/JiffyLubeLogo.svg'
 
 export default class Login extends React.Component {
     render() {
@@ -8,7 +9,7 @@ export default class Login extends React.Component {
             <div className='login_page_page-container'>
                 <img
                     className='login_page_logo'
-                    src='https://vignette.wikia.nocookie.net/logopedia/images/8/8d/Jiffy_Lube.svg/revision/latest?cb=20130820190427'
+                    src={JiffyLubeLogo}
                     alt='' />
 
                 <div className='login_page_login-container'>

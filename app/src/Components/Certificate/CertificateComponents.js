@@ -7,8 +7,8 @@ export class BackToSearch extends React.Component {
         return (
             <div style={{ width: '1200px', display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '40px 0 60px 0' }}>
                 <h1 style={{ marginBottom: '20px', fontSize: '30px' }}>Certificate has been updated.</h1>
-                <Link style={{ width: '60%' }} to='/search'>
-                    <button className='cert_redeemed_button' style={{ backgroundColor: '#960030', width: '100%', cursor: 'pointer' }}>Back To Search</button>
+                <Link style={{ width: '30%' }} to='/search'>
+                    <button className='cert_redeemed_button' style={{ backgroundColor: '#960030', width: '100%', height: '50px', cursor: 'pointer', fontSize: '16px' }}>Back To Search</button>
                 </Link>
             </div>
         )
@@ -52,7 +52,7 @@ export class RedeemCertificate extends React.Component {
     render() {
         return (
             <div id='cert_redeem_controller'>
-                <section className='cert_buyer_container cert_redeeminfo_container'>
+                <section className='cert_buyer_container' style={{width: '100%'}}>
                     <header>
                         <h1>REDEEM INFO</h1>
                     </header>
@@ -84,8 +84,8 @@ export class RedeemCertificate extends React.Component {
                     </section>
                 </section>
 
-                <section className='cert_button_container' style={{ margin: '-20px 0 60px 0' }}>
-                    <button onClick={() => { this.props.updateState('showRedeemInfo', false), this.props.updateState('showButtonHeader', true) }} style={{ backgroundColor: '#BC1B4B', width: '40%', height: '50px' }}>CANCEL</button>
+                <section className='cert_button_container' style={{ margin: '-20px 0 60px 0', width: '100%' }}>
+                    <button onClick={() => { this.props.updateState('showRedeemInfo', false); this.props.updateState('showButtonHeader', true); }} style={{ backgroundColor: '#BC1B4B', width: '40%', height: '50px' }}>CANCEL</button>
 
                     {this.state.currentDate && this.state.currentTime && this.state.storeNumber && this.state.customerName ?
                         <button onClick={() => this.redeemCertificate()} style={{ backgroundColor: '#42EA1A', width: '40%', height: '50px' }}>REDEEM</button>
@@ -127,7 +127,7 @@ export class UnRedeemCertificate extends React.Component {
                 <h1 style={{ fontSize: '30px' }}>Are you sure you want to unredeem this certificate?</h1>
 
                 <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%', marginTop: '20px' }}>
-                    <button onClick={() => { this.props.updateState('showButtonHeader', true), this.props.updateState('showUnRedeemInfo', false) }} className='cert_redeemed_button' style={{ marginBottom: '20px', backgroundColor: '#960030' }}>CANCEL</button>
+                    <button onClick={() => { this.props.updateState('showButtonHeader', true); this.props.updateState('showUnRedeemInfo', false); }} className='cert_redeemed_button' style={{ marginBottom: '20px', backgroundColor: '#960030' }}>CANCEL</button>
                     <button onClick={() => this.unredeemCertificate()} className='cert_redeemed_button' style={{ backgroundColor: '#63b3ff' }}>UNREDEEM</button>
                 </div>
             </div>

@@ -21,30 +21,37 @@ export default class Dashboard extends React.Component {
     if (this.state.searchText) {
       this.setState({
         certificatesToDisplay: purchasedCertificates.filter((certificate, index) => {
+          let tempCertificate;
           if (this.state.searchFilter !== 'number') {
-            if (certificate[this.state.searchFilter].toLowerCase().includes(this.state.searchText.toLowerCase())) {
-              return certificate;
-            }
+            if (certificate[this.state.searchFilter].toLowerCase().includes(this.state.searchText.toLowerCase()))
+              tempCertificate = certificate;
           }
-          else
-            if (certificate[this.state.searchFilter] === Number(this.state.searchText)) {
-              return certificate;
-            }
+          else {
+            if (certificate[this.state.searchFilter] === Number(this.state.searchText))
+            tempCertificate = certificate;
+          }
+          return tempCertificate;
         }),
         hasSearched: true
-      }),
-        scroller.scrollTo('results_controller', {
-          duration: 700,
-          smooth: true,
-          ignoreCancelEvents: true
-        })
+      })
+
+      scroller.scrollTo('results_controller', {
+        duration: 700,
+        smooth: true,
+        ignoreCancelEvents: true,
+        offset: -200
+      })
+
     } else {
       this.setState({ certificatesToDisplay: [] })
     }
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
-    console.log(this.state.index)
     return (
       <div>
         <Header />
@@ -64,8 +71,8 @@ export default class Dashboard extends React.Component {
             <button onClick={() => this.filterCertificates()}>Search</button>
           </div>
 
-          <div className='dashboard_results_container' name='results_controller'>
-            <h1>Search Results</h1>
+          <div className='dashboard_results_container'>
+            <h1 name='results_controller'>Search Results</h1>
             <section>
               <h1>TITLE</h1>
               <h2>STATUS</h2>

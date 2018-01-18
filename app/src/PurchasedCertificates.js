@@ -9,10 +9,10 @@ module.exports = {
             email: 'purchaser@email.com',
             nameOfBuyer: 'Cybil Bennett',
             phoneNumber: '801-978-7257',
-            datePurchased: '12/06/2017',
+            datePurchased: '12-06-2017',
             status: 'Redeemed',
             nameOfRedemption: 'James Sunderland',
-            dateRedeemed: '12/07/2017',
+            dateRedeemed: '12-07-2017',
             timeRedeemed: '3:30pm',
             storeRedeemed: '967'
         },

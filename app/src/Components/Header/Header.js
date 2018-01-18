@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
-import UserIcon from '../../resources/user.svg';
+import Logout from '../../resources/Logout.png'
 
 export default class Header extends React.Component {
     render() {
@@ -17,19 +17,10 @@ export default class Header extends React.Component {
                 </section>
 
                 <section className='header_options'>
-                    <Link to={{ pathname: '/', query: { showProducts: true } }} >
-                        <div className='header_options_container'>
-                            <section>
-                                <img src={UserIcon} alt='' />
-                            </section>
-                            <h1>Account</h1>
-                        </div>
-                    </Link>
-
                     <Link to='/login'>
                         <div className='header_options_container'>
                             <section>
-                                <img src={'http://www.iconsplace.com/icons/preview/white/logout-256.png'} alt='' />
+                                <img src={Logout} alt='' />
                             </section>
                             <h1>Logout</h1>
                         </div>

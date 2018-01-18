@@ -3,6 +3,7 @@ import './Certificate.css';
 import { Link } from 'react-router-dom';
 import { purchasedCertificates } from '../../PurchasedCertificates';
 import Header from '../Header/Header';
+import moment from 'moment';
 
 import { BackToSearch, RedeemCertificate, UnRedeemCertificate } from './CertificateComponents'
 
@@ -67,9 +68,9 @@ export default class Certificate extends React.Component {
                         <section className='cert_button_container'>
                             {this.state.certificateInfo.status === 'Redeemable'
                                 ?
-                                <button onClick={() => this.setState({ showButtonHeader: false, showRedeemInfo: true, showBackToSearch: false })} style={{ backgroundColor: '#42EA1A' }}>Redeem Certificate</button>
+                                <button onClick={() => this.setState({ showButtonHeader: false, showRedeemInfo: true, showBackToSearch: false })} style={{ backgroundColor: '#48d20e' }}>Redeem Certificate</button>
                                 :
-                                <button onClick={() => { this.setState({ showBackToSearch: false, showButtonHeader: false, showUnRedeemInfo: true }) }} style={{ backgroundColor: '#BC1B4B' }}>Unredeem Certificate</button>
+                                <button onClick={() => { this.setState({ showBackToSearch: false, showButtonHeader: false, showUnRedeemInfo: true }) }} style={{ backgroundColor: '#BC1B4B' }}>UnRedeem Certificate</button>
                             }
                             <button style={{ backgroundColor: '#65B3FF' }}>View Profile</button>
                         </section>
@@ -99,7 +100,7 @@ export default class Certificate extends React.Component {
 
                             <section className='cert_info_status_container'>
                                 <h1>STATUS</h1>
-                                <h2 style={this.state.certificateInfo.status === 'Redeemable' ? { color: 'lime', fontWeight: 'bold' } : { color: 'red', fontWeight: 'bold' }}>{this.state.certificateInfo.status}</h2>
+                                <h2 style={this.state.certificateInfo.status === 'Redeemable' ? { color: '#48d20e', fontWeight: 'bold' } : { color: 'red', fontWeight: 'bold' }}>{this.state.certificateInfo.status}</h2>
                             </section>
 
                             <section className='cert_info_purchase_container'>
@@ -175,6 +176,7 @@ export default class Certificate extends React.Component {
                                 <section>
                                     <h1>WHEN</h1>
                                     <h2>{this.state.certificateInfo.dateRedeemed} - {this.state.certificateInfo.timeRedeemed}</h2>
+                                    <h3>{moment(this.state.certificateInfo.dateRedeemed, 'MM-DD-YYYY').fromNow()}</h3>
                                 </section>
                             </div>
                         </section>

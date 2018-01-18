@@ -8,7 +8,8 @@
 }
 
 .cert_header_container {
-    width: 1200px;
+    min-width: 900px;
+    width: 60%;
     height: 60px;
     display: flex;
     margin-top: 150px;
@@ -46,9 +47,8 @@
 }
 
 .cert_information_container, .cert_buyer_container {
-    width: 1200px;
-    width: auto !important;
-    min-width: 1200px;
+    min-width: 900px;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,16 +97,17 @@
 }
 
 .cert_info_title_container {
-    width: 40%;
+    width: 30%;
 }
 .cert_info_status_container {
     width: 20%;
 }
 .cert_info_purchase_container {
     width: 20%;
+    margin-right: 5%;
 }
 .cert_info_expiration_container {
-    width: 20%;
+    width: 25%;
 }
 
 .cert_buyer_information_content_container {
@@ -146,7 +147,8 @@
 }
 
 .cert_button_container {
-    width: 1200px;
+    min-width: 900px;
+    width: 60%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -155,13 +157,12 @@
 
 .cert_button_container button, .cert_redeemed_button {
     border: none;
-    width: 30%;
-    height: 60px;
-    font-size: 18px;
+    width: 25%;
+    height: 50px;
+    font-size: 16px;
     color: white;
     font-weight: bolder;
     transition: all 0.3s ease;
-    border-radius: 2px;
 }
 
 .cert_page_container button:hover {
@@ -188,4 +189,16 @@
     box-sizing: border-box;
     border: 1px solid #8E0E34;
     font-weight: bold;
+}
+
+.cert_buyer_container h3 {
+    color: rgb(43, 43, 43);
+}
+
+#cert_redeem_controller {
+    min-width: 900px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

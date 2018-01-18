@@ -12,13 +12,13 @@
 
 .login_page_logo {
     width: 350px;
-    margin: 40px;
 }
 
 .login_page_login-container {
     width: 400px;
     height: 280px;
     padding: 20px;
+    margin-top: 20px;
     background: white;
     border-radius: 3px;
     border: 1px solid #8b2040;
@@ -89,4 +89,11 @@
     .login_page_footer { 
         position: inherit;
     }
- }
+}
+
+@media screen and (min-device-width: 1200px) {
+    .login_page_login-container {
+        width: 350px;
+        height: 250px;
+    }
+} 
