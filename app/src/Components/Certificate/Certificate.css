@@ -138,14 +138,6 @@
     text-align: center;
 }
 
-#cert_undredeemed_controller {
-    display: none;
-}
-
-#cert_redeem_controller {
-    display: none;
-}
-
 .cert_unredeemed_container section {
     margin-bottom: 40px;
 }

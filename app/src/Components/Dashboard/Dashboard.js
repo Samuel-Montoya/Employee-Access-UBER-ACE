@@ -20,26 +20,31 @@ export default class Dashboard extends React.Component {
   filterCertificates = () => {
     if (this.state.searchText) {
       this.setState({
-        certificatesToDisplay: purchasedCertificates.filter((certificate) => {
+        certificatesToDisplay: purchasedCertificates.filter((certificate, index) => {
           if (this.state.searchFilter !== 'number') {
-            return certificate[this.state.searchFilter].toLowerCase().includes(this.state.searchText.toLowerCase());
+            if (certificate[this.state.searchFilter].toLowerCase().includes(this.state.searchText.toLowerCase())) {
+              return certificate;
+            }
           }
           else
-            return certificate[this.state.searchFilter] === Number(this.state.searchText);
+            if (certificate[this.state.searchFilter] === Number(this.state.searchText)) {
+              return certificate;
+            }
         }),
         hasSearched: true
       }),
-      scroller.scrollTo('results_controller', {
-        duration: 700,
-        smooth: true,
-        ignoreCancelEvents: true
-    })
+        scroller.scrollTo('results_controller', {
+          duration: 700,
+          smooth: true,
+          ignoreCancelEvents: true
+        })
     } else {
       this.setState({ certificatesToDisplay: [] })
     }
   }
 
   render() {
+    console.log(this.state.index)
     return (
       <div>
         <Header />
@@ -85,7 +90,7 @@ export default class Dashboard extends React.Component {
           icon = 'fa fa-times-circle fa-2x';
         }
         return (
-          <Link key={index} to={{ pathname: '/certificate/' + certificate.number, query: { certificateInfo: certificate, index: index } }}>
+          <Link key={index} to={{ pathname: '/certificate/' + certificate.number, query: { certificateInfo: certificate } }}>
             <div className='dashboard_certificate_container'>
               <h1>{certificate.title}</h1>
               <h2 style={{ fontWeight: 'bolder', color: color }}>{certificate.status}</h2>
