@@ -186,9 +186,40 @@ export class RedeemCertificate extends React.Component {
                     {this.state.didRedeem ?
                         <BackToSearch updateState={this.props.updateState} displayContainer='showRedeemInfo' />
                         :
-                        <button style={{ backgroundColor: 'dimgray', width: '40%', height: '50px' }} onClick={() => document.getElementById('uncomplete_text_controller').style.display = 'block'}>REDEEM</button>}
-                </section>
-            </div>
+                        <PopupBody>
+                            <RedeemContainer>
+                                <h1 style={{ marginBottom: '10px' }}>Fill out all * fields:</h1>
+                                <section>
+                                    <div>
+                                        <h1>CUSTOMER FULL NAME *</h1>
+                                        <input id='cert_customer_input' placeholder='James Sunderland...' onChange={(text) => this.setState({ customerName: text.target.value })} />
+                                        <h1 id='uncomplete_text_controller' style={{ fontSize: '16px', marginTop: '10px', color: 'red', display: 'none' }}>Enter customer's full name.</h1>
+                                    </div>
+
+                                    <div>
+                                        <h1 style={{ marginLeft: '30px' }}>STORE *</h1>
+                                        <input id='cert_store_input' placeholder='932' value={this.state.storeNumber} onChange={(text) => this.setState({ storeNumber: text.target.value })} style={{ alignSelf: 'flex-end' }} />
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <div>
+                                        <h1>DATE *</h1>
+                                        <input id='cert_date_input' placeholder='05/12/2018' value={this.state.currentDate} onChange={(text) => this.setState({ currentDate: text.target.value })} />
+                                    </div>
+
+                                    <div>
+                                        <h1 style={{ marginLeft: '30px' }}>TIME *</h1>
+                                        <input id='cert_time_input' placeholder='3:30 PM' value={this.state.currentTime} onChange={(text) => this.setState({ currentTime: text.target.value })} style={{ alignSelf: 'flex-end' }} />
+                                    </div>
+                                </section>
+                                {this.state.currentDate && this.state.currentTime && this.state.storeNumber && this.state.customerName ?
+                                    <button onClick={() => this.redeemCertificate()} style={{ backgroundColor: '#42EA1A' }}>Redeem</button>
+                                    :
+                                    <button style={{ backgroundColor: 'dimgray' }} onClick={() => document.getElementById('uncomplete_text_controller').style.display = 'block'}>Redeem</button>}
+                            </RedeemContainer>
+                        </PopupBody>
+                    }
                 </PopupContent>
             </PopupContainer>
         )
