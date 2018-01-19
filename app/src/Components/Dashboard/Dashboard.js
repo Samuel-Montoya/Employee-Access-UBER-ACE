@@ -54,7 +54,7 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header displayStatus={false} />
         <section className='dashboard_container'>
           <div className='dashboard_search-container'>
             <h1>Search for a Certificate</h1>
