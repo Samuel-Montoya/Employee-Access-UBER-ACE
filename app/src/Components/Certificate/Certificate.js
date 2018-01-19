@@ -235,7 +235,7 @@ export default class Certificate extends React.Component {
                             <section style={{ width: '50%' }}>
                                 <h1>STEPS TO PURCHASE</h1>
                                 <p>
-                                    1) Enter Coupon Number<br />
+                                    1) Enter Coupon Code<br />
                                     2) Select Certifcate for Method of Payment<br />
                                     3) Enter Certificate Number
                                 </p>
