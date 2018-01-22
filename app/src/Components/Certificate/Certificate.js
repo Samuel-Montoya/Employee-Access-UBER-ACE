@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { purchasedCertificates } from '../../PurchasedCertificates';
 import Header from '../Header/Header';
 import moment from 'moment';
 import styled from 'styled-components';
-import { BackToSearch, RedeemCertificate, UnRedeemCertificate } from './CertificateComponents';
+import { RedeemCertificate, UnRedeemCertificate } from './CertificateComponents';
+import 'babel-polyfill';
 
 let PageContainer = styled.div`
     width: 100vw;
@@ -98,9 +99,12 @@ let CertInformationContainer = styled.section`
         margin-bottom: 40px;
         font-size: 18px;
 
+        h1 {
+            width: 100%;
+            text-align: center;
+        }
+
         h2 {
-            position: absolute;
-            right: 0;
             margin-right: 10px;
         }
     }
@@ -148,24 +152,46 @@ export default class Certificate extends React.Component {
             storeNumber: 947,
             customerName: '',
             showRedeemInfo: false,
-            showUnRedeemInfo: false
+            showUnRedeemInfo: false,
+            shouldRedirect: false
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.updateCertificate(true, nextProps.match.params.certificate_number);
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        if (this.props.location.query) {
+        this.updateCertificate(false);
+    }
+
+    updateCertificate = (fromHeader, certificateNumber) => {
+        let newCertificateNumber;
+        if (!fromHeader) {
+            newCertificateNumber = this.props.match.params.certificate_number
+        } else {
+            newCertificateNumber = certificateNumber;
+        }
+
+        if (this.props.location.query && !fromHeader) {
             this.setState({
                 certificateInfo: this.props.location.query.certificateInfo
             })
         } else {
-            purchasedCertificates.forEach((certificate, index) => {
-                if (certificate.number === Number(this.props.match.params.certificate_number)) {
+            for (let certificate of purchasedCertificates) {
+                if (certificate.number === Number(newCertificateNumber)) {
                     this.setState({
-                        certificateInfo: certificate
+                        certificateInfo: certificate,
+                        shouldRedirect: false
+                    });
+                    break;
+                } else {
+                    this.setState({
+                        shouldRedirect: true
                     })
                 }
-            })
+            }
         }
     }
 
@@ -176,6 +202,9 @@ export default class Certificate extends React.Component {
     }
 
     render() {
+        if (this.state.shouldRedirect) {
+            return <Redirect to={{ pathname: '/search', query: { resultsToShow: false } }} />
+        }
         return (
             <div style={{ height: '100vh' }}>
                 <Header displayStatus={true} />

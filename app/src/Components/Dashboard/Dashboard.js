@@ -28,19 +28,14 @@ export default class Dashboard extends React.Component {
           }
           else {
             if (certificate[this.state.searchFilter] === Number(this.state.searchText))
-            tempCertificate = certificate;
+              tempCertificate = certificate;
           }
           return tempCertificate;
         }),
         hasSearched: true
       })
 
-      scroller.scrollTo('results_controller', {
-        duration: 700,
-        smooth: true,
-        ignoreCancelEvents: true,
-        offset: -200
-      })
+      this.scrollToResults();
 
     } else {
       this.setState({ certificatesToDisplay: [] })
@@ -49,6 +44,24 @@ export default class Dashboard extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    if (this.props.location.query) {
+      if (this.props.location.query.resultsToShow === false) {
+        this.setState({ hasSearched: true })
+        this.scrollToResults();
+      } else if (this.props.location.query.searchInfo) {
+        let searchInfo = this.props.location.query.searchInfo;
+        this.setState({ searchFilter: searchInfo.searchFilter, searchText: searchInfo.searchInput }, () => { this.filterCertificates() });
+      }
+    }
+  }
+
+  scrollToResults = () => {
+    scroller.scrollTo('results_controller', {
+      duration: 700,
+      smooth: true,
+      ignoreCancelEvents: true,
+      offset: -200
+    })
   }
 
   render() {
@@ -59,8 +72,9 @@ export default class Dashboard extends React.Component {
           <div className='dashboard_search-container'>
             <h1>Search for a Certificate</h1>
             <section>
-              <input onChange={(input) => { if (input.target.value) { this.setState({ searchText: input.target.value }) } else this.setState({ searchText: '', certificatesToDisplay: [] }) }} placeholder='Search...' />
-              <select onChange={(input) => this.setState({ searchFilter: input.target.value })}>
+              <input value={this.state.searchText
+              } onChange={(input) => { if (input.target.value) { this.setState({ searchText: input.target.value }) } else this.setState({ searchText: '', certificatesToDisplay: [] }) }} placeholder='Search...' />
+              <select value={this.state.searchFilter} onChange={(input) => this.setState({ searchFilter: input.target.value })}>
                 <option value="number">Certificate Number</option>
                 <option value="email">Email</option>
                 <option value="nameOfBuyer">Name</option>

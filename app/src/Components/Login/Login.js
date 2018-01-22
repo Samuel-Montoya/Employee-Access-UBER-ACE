@@ -9,7 +9,7 @@ export default class Login extends React.Component {
             <div className='login_page_page-container'>
                 <img
                     className='login_page_logo'
-                    src={JiffyLubeLogo}
+                    src={'http://logo-load.com/uploads/posts/2016-03/1459331294_jiffy-lube-logo.png'}
                     alt='' />
 
                 <div className='login_page_login-container'>

@@ -47,6 +47,7 @@ let SearchContainer = styled.div`
         -webkit-appearance: none;
         -moz-appearance: none;
         -webkit-border-radius: 0px;
+        -o-appearance: none;
         border: none;
         background: url('https://www.materialui.co/materialIcons/hardware/keyboard_arrow_down_black_192x192.png');
         background-position: 97% 50%;
@@ -54,9 +55,18 @@ let SearchContainer = styled.div`
         background-size: 25px;
         background-color: white;
     }
+    select::-ms-expand { display: none; }
 `;
 
 export default class Header extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            searchInput: '',
+            searchFilter: 'number'
+        }
+    }
     render() {
         return (
             <header className='header_container'>
@@ -69,27 +79,36 @@ export default class Header extends React.Component {
                     <h1>Employee Access</h1>
                 </section>
 
-                {this.props.displayStatus && <SearchContainer>
-                    <input placeholder='Search...' />
-                    <button>Search</button>
-                    <select onChange={(input) => this.setState({ searchFilter: input.target.value })}>
-                        <option value="number">Certificate Number</option>
-                        <option value="email">Email</option>
-                        <option value="nameOfBuyer">Name</option>
-                        <option value="phoneNumber">Phone Number</option>
-                    </select>
-                </SearchContainer>}
+                {this.props.displayStatus &&
+                    <SearchContainer>
+                        <input onChange={(text) => this.setState({ searchInput: text.target.value })} placeholder='Search...' />
+                        {this.state.searchFilter === 'number' && this.state.searchInput ?
+                            <Link to={'/certificate/' + this.state.searchInput}>
+                                <button>Search</button>
+                            </Link>
+                            : this.state.searchInput ?
+                                <Link to={{ pathname: '/search', query: { searchInfo: { searchInput: this.state.searchInput, searchFilter: this.state.searchFilter } } }}>
+                                    <button>Search</button>
+                                </Link> : <button>Search</button>
+                        }
+                        <select onChange={(input) => this.setState({ searchFilter: input.target.value })}>
+                            <option value="number">Certificate Number</option>
+                            <option value="email">Email</option>
+                            <option value="nameOfBuyer">Name</option>
+                            <option value="phoneNumber">Phone Number</option>
+                        </select>
+                    </SearchContainer>}
 
-                    <section className='header_options'>
-                        <Link to='/login'>
-                            <div className='header_options_container'>
-                                <section>
-                                    <img src={Logout} alt='' />
-                                </section>
-                                <h1>Logout</h1>
-                            </div>
-                        </Link>
-                    </section>
+                <section className='header_options'>
+                    <Link to='/login'>
+                        <div className='header_options_container'>
+                            <section>
+                                <img src={Logout} alt='' />
+                            </section>
+                            <h1>Logout</h1>
+                        </div>
+                    </Link>
+                </section>
             </header>
         )
     }

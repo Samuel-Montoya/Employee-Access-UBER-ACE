@@ -45,13 +45,15 @@ let PopupHeader = styled.div`
     font-weight: bolder;
     color: white;
     background-color: #8E0E34;
-    position: relative;
     margin-bottom: 20px;
     font-size: 18px;
 
+    h1 {
+        width: 100%;
+        text-align: center;
+    }
+
     span {
-        position: absolute;
-        right: 0;
         margin: -3px 10px 0 0;
         font-size: 28px;
         cursor: pointer;
@@ -88,10 +90,10 @@ export class BackToSearch extends React.Component {
             <PopupBody>
                 <BackToSearchContainer>
                     <h1>Certificate has been updated.</h1>
+                    <button style={{ backgroundColor: '#63b3ff' }} onClick={() => this.props.updateState(this.props.displayContainer, false)}>View Certificate</button>
                     <Link style={{ width: '100%' }} to='/search'>
                         <button style={{ backgroundColor: '#8E0E34', cursor: 'pointer' }}>Back To Search</button>
                     </Link>
-                    <button style={{ backgroundColor: '#63b3ff' }} onClick={() => this.props.updateState(this.props.displayContainer, false)}>View Certificate</button>
                 </BackToSearchContainer>
             </PopupBody>
         )
@@ -192,7 +194,7 @@ export class RedeemCertificate extends React.Component {
                                 <section>
                                     <div>
                                         <h1>CUSTOMER FULL NAME *</h1>
-                                        <input id='cert_customer_input' placeholder='James Sunderland...' onChange={(text) => this.setState({ customerName: text.target.value })} />
+                                        <input id='cert_customer_input' placeholder='Full Name...' onChange={(text) => this.setState({ customerName: text.target.value })} />
                                         <h1 id='uncomplete_text_controller' style={{ fontSize: '16px', marginTop: '10px', color: 'red', display: 'none' }}>Enter customer's full name.</h1>
                                     </div>
 
@@ -244,6 +246,8 @@ let UnRedeemContainer = styled.div`
         box-sizing: border-box;
         font-size: 18px;
         margin-top: 10px;
+        resize: none;
+        font-family: inherit;
     }
 
     button {
@@ -296,7 +300,7 @@ export class UnRedeemCertificate extends React.Component {
                         <PopupBody>
                             <UnRedeemContainer>
                                 <h1>Provide a reason for unredemption:</h1>
-                                <textarea onChange={(text) => this.setState({reasonText: text.target.value})} />
+                                <textarea onChange={(text) => this.setState({ reasonText: text.target.value })} />
                                 {this.state.reasonText ? <button style={{ backgroundColor: '#48d20e' }} onClick={() => this.unredeemCertificate()}>Unredeem</button>
                                     : <button style={{ backgroundColor: 'dimgray' }}>Unredeem</button>}
                             </UnRedeemContainer>
