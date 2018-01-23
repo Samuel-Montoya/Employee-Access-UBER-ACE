@@ -61,10 +61,16 @@ let HeaderButtonContainer = styled.section`
     align-items: center;
     margin-bottom: 20px;
 `;
-let BackButtonIcon = styled.img`
-    width: 25%;
-    height: 80%;
-    margin: 0 20px 0 10px;
+let BackButtonContainer = styled.div`
+    transition: all 0.2s ease;
+    img {    
+        width: 25%;
+        height: 80%;
+        margin: 0 20px 0 10px;
+    }
+    &:hover {
+        box-shadow: 0px -6px 0px rgba(0, 0, 0, 0.3) inset;
+    }
 `;
 let Title = styled.h1`
     width: 100%;
@@ -211,10 +217,10 @@ export default class Certificate extends React.Component {
                 <PageContainer>
                     <CertHeaderContainer>
                         <Link to='/search'>
-                            <div>
-                                <BackButtonIcon src='https://www.materialui.co/materialIcons/navigation/arrow_back_white_192x192.png' alt='' />
+                            <BackButtonContainer>
+                                <img src='https://www.materialui.co/materialIcons/navigation/arrow_back_white_192x192.png' alt='' />
                                 <h1>BACK</h1>
-                            </div>
+                            </BackButtonContainer>
                         </Link>
                         <Title>CERTIFICATE #{this.state.certificateInfo.number}</Title>
                     </CertHeaderContainer>
