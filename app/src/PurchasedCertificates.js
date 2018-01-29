@@ -12,9 +12,9 @@ module.exports = {
             datePurchased: '12-06-2017',
             status: 'Redeemed',
             nameOfRedemption: 'James Sunderland',
-            dateRedeemed: '12-07-2017',
-            timeRedeemed: '3:30pm',
-            storeRedeemed: '967'
+            dateRedeemed: new Date('Mon Jan 29 2018 11:13:28 GMT-0700'),
+            storeRedeemed: '967',
+            licensePlate: '43DGB4'
         },
         {
             number: 54262,
@@ -30,7 +30,8 @@ module.exports = {
             nameOfRedemption: null,
             dateRedeemed: null,
             timeRedeemed: null,
-            storeRedeemed: null
+            storeRedeemed: null,
+            licensePlate: null
         },
         {
             number: 55674,
@@ -44,9 +45,9 @@ module.exports = {
             datePurchased: '12/06/2017',
             status: 'Redeemed',
             nameOfRedemption: 'Alessa Gillespie',
-            dateRedeemed: '01/04/2017',
-            timeRedeemed: '1:40pm',
-            storeRedeemed: '969'
+            dateRedeemed: new Date('Mon Jan 29 2018 11:13:28 GMT-0700'),
+            storeRedeemed: '969',
+            licensePlate: '43DGB4'
         },
         {
             number: 56734,
@@ -62,7 +63,8 @@ module.exports = {
             nameOfRedemption: null,
             dateRedeemed: null,
             timeRedeemed: null,
-            storeRedeemed: null
+            storeRedeemed: null,
+            licensePlate: null
         },
         {
             number: 54755,
@@ -76,9 +78,9 @@ module.exports = {
             datePurchased: '12/06/2017',
             status: 'Redeemed',
             nameOfRedemption: 'Cheryl Mason',
-            dateRedeemed: '10/20/2015',
-            timeRedeemed: '5:25pm',
-            storeRedeemed: '967'
+            dateRedeemed: new Date('Mon Jan 29 2018 11:13:28 GMT-0700'),
+            storeRedeemed: '967',
+            licensePlate: '43DGB4'
         },
         {
             number: 58653,
@@ -92,9 +94,9 @@ module.exports = {
             datePurchased: '12/06/2017',
             status: 'Redeemed',
             nameOfRedemption: 'James Sunderland',
-            dateRedeemed: '11/14/2016',
-            timeRedeemed: '1:20pm',
-            storeRedeemed: '968'
+            dateRedeemed: new Date('Mon Jan 29 2018 11:13:28 GMT-0700'),
+            storeRedeemed: '968',
+            licensePlate: '43DGB4'
         },
         {
             number: 52345,
@@ -108,9 +110,9 @@ module.exports = {
             datePurchased: '12/06/2017',
             status: 'Redeemed',
             nameOfRedemption: 'Joshua Shepherd',
-            dateRedeemed: '12/07/2017',
-            timeRedeemed: '3:30pm',
-            storeRedeemed: '969'
+            dateRedeemed: new Date('Mon Jan 29 2018 11:13:28 GMT-0700'),
+            storeRedeemed: '969',
+            licensePlate: '43DGB4'
         },
         {
             number: 54743,
@@ -124,9 +126,9 @@ module.exports = {
             datePurchased: '12/06/2017',
             status: 'Redeemed',
             nameOfRedemption: 'Anne Cunningham',
-            dateRedeemed: '12/07/2017',
-            timeRedeemed: '3:30pm',
-            storeRedeemed: '967'
+            dateRedeemed: new Date('Mon Jan 29 2018 11:13:28 GMT-0700'),
+            storeRedeemed: '967',
+            licensePlate: '43DGB4'
         },
         {
             number: 54325,
@@ -142,7 +144,8 @@ module.exports = {
             nameOfRedemption: null,
             dateRedeemed: null,
             timeRedeemed: null,
-            storeRedeemed: null
+            storeRedeemed: null,
+            licensePlate: null
         },
         {
             number: 44213,
@@ -158,7 +161,8 @@ module.exports = {
             nameOfRedemption: null,
             dateRedeemed: null,
             timeRedeemed: null,
-            storeRedeemed: null
+            storeRedeemed: null,
+            licensePlate: null
         },
         {
             number: 52236,
@@ -174,7 +178,8 @@ module.exports = {
             nameOfRedemption: null,
             dateRedeemed: null,
             timeRedeemed: null,
-            storeRedeemed: null
+            storeRedeemed: null,
+            licensePlate: null
         },
         {
             number: 56842,
@@ -190,7 +195,8 @@ module.exports = {
             nameOfRedemption: null,
             dateRedeemed: null,
             timeRedeemed: null,
-            storeRedeemed: null
+            storeRedeemed: null,
+            licensePlate: null
         },
         {
             number: 53267,
@@ -206,7 +212,8 @@ module.exports = {
             nameOfRedemption: null,
             dateRedeemed: null,
             timeRedeemed: null,
-            storeRedeemed: null
+            storeRedeemed: null,
+            licensePlate: null
         },
         {
             number: 63572,
@@ -222,7 +229,8 @@ module.exports = {
             nameOfRedemption: null,
             dateRedeemed: null,
             timeRedeemed: null,
-            storeRedeemed: null
+            storeRedeemed: null,
+            licensePlate: null
         }
     ]
 }

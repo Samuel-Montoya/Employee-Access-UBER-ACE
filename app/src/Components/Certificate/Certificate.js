@@ -18,6 +18,7 @@ let PageContainer = styled.div`
     button {
         border: none;
         width: 25%;
+        min-width: 250px;
         height: 50px;
         font-size: 16px;
         color: white;
@@ -118,6 +119,7 @@ let CertInformationContainer = styled.section`
     div {
         width: 95%;
         display: flex;
+        justify-content: space-around;
         margin-bottom: 50px;
 
         p {
@@ -134,8 +136,7 @@ let CertInformationContainer = styled.section`
         color: #8E0E34;
         
         ${props => props.small &&
-        `width: 33.33%;
-            text-align: center;`
+        `text-align: center;`
     }
 
         h2 {
@@ -266,7 +267,7 @@ export default class Certificate extends React.Component {
                             </section>
                         </div>
 
-                        <div>
+                        <div style={{ justifyContent: 'normal' }}>
                             <section style={{ width: '50%' }}>
                                 <h1>STEPS TO PURCHASE</h1>
                                 <p>
@@ -325,9 +326,13 @@ export default class Certificate extends React.Component {
                                 </section>
 
                                 <section>
+                                    <h1>LICENSE PLATE</h1>
+                                    <h2>{this.state.certificateInfo.licensePlate}</h2>
+                                </section>
+
+                                <section>
                                     <h1>WHEN</h1>
-                                    <h2>{this.state.certificateInfo.dateRedeemed} - {this.state.certificateInfo.timeRedeemed}</h2>
-                                    <h3>{moment(this.state.certificateInfo.dateRedeemed, 'MM-DD-YYYY').fromNow()}</h3>
+                                    <h2>{moment(this.state.certificateInfo.dateRedeemed).format('dddd, MMMM Do YYYY')} - {moment(this.state.certificateInfo.dateRedeemed).format('h:mm a')}<br />{moment(this.state.certificateInfo.dateRedeemed).fromNow()}</h2>
                                 </section>
                             </div>
                         </CertInformationContainer>}

@@ -1,7 +1,7 @@
 .header_container {
     width: 100vw;
     height: 100px;
-    background-color: #97002f;
+    background: linear-gradient(#ca003a, #98012e);
     display: flex;
     justify-content: space-between;
     position: fixed;

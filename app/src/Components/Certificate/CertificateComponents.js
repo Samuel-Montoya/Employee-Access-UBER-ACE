@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { purchasedCertificates } from '../../PurchasedCertificates';
 import styled, { keyframes } from 'styled-components';
+import moment from 'moment';
 
 
 let PopupContainer = styled.div`
@@ -150,6 +151,7 @@ export class RedeemCertificate extends React.Component {
         this.state = {
             didRedeem: false,
             customerName: '',
+            licensePlate: '',
             storeNumber: 937,
             currentDate: new Date().toLocaleDateString(),
             currentTime: new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
@@ -158,14 +160,15 @@ export class RedeemCertificate extends React.Component {
 
     redeemCertificate = () => {
         let tempCertificate;
+        let time = moment(this.state.currentDate + ' ' + this.state.currentTime, "MM-DD-YYYY h:mm a")
         purchasedCertificates.forEach(certificate => {
             if (certificate.number === this.props.certificateInfo.number)
                 tempCertificate = Object.assign({}, certificate)
         })
         tempCertificate.nameOfRedemption = this.state.customerName;
         tempCertificate.storeRedeemed = this.state.storeNumber;
-        tempCertificate.dateRedeemed = this.state.currentDate;
-        tempCertificate.timeRedeemed = this.state.currentTime;
+        tempCertificate.dateRedeemed = time._d;
+        tempCertificate.licensePlate = '4DFA3G';
         tempCertificate.status = 'Redeemed';
         purchasedCertificates.forEach((certificate, index) => {
             if (certificate.number === this.props.certificateInfo.number)
@@ -194,28 +197,33 @@ export class RedeemCertificate extends React.Component {
                                 <section>
                                     <div>
                                         <h1>CUSTOMER FULL NAME *</h1>
-                                        <input id='cert_customer_input' placeholder='Full Name...' onChange={(text) => this.setState({ customerName: text.target.value })} />
+                                        <input placeholder='Full Name...' onChange={(text) => this.setState({ customerName: text.target.value })} />
                                         <h1 id='uncomplete_text_controller' style={{ fontSize: '16px', marginTop: '10px', color: 'red', display: 'none' }}>Enter customer's full name.</h1>
                                     </div>
 
                                     <div>
-                                        <h1 style={{ marginLeft: '30px' }}>STORE *</h1>
-                                        <input id='cert_store_input' placeholder='932' value={this.state.storeNumber} onChange={(text) => this.setState({ storeNumber: text.target.value })} style={{ alignSelf: 'flex-end' }} />
+                                        <h1 style={{ marginLeft: '30px' }}>LICENSE PLATE *</h1>
+                                        <input placeholder='License Plate #...' value={this.state.licensePlate} onChange={(text) => this.setState({ licensePlate: text.target.value.toUpperCase() })} style={{ alignSelf: 'flex-end' }} />
                                     </div>
                                 </section>
 
                                 <section>
                                     <div>
                                         <h1>DATE *</h1>
-                                        <input id='cert_date_input' placeholder='05/12/2018' value={this.state.currentDate} onChange={(text) => this.setState({ currentDate: text.target.value })} />
+                                        <input placeholder='05/12/2018...' value={this.state.currentDate} onChange={(text) => this.setState({ currentDate: text.target.value })} />
+                                    </div>
+
+                                    <div>
+                                        <h1 style={{ marginLeft: '30px' }}>STORE *</h1>
+                                        <input placeholder='947...' value={this.state.storeNumber} onChange={(text) => this.setState({ storeNumber: text.target.value })} style={{ alignSelf: 'flex-end' }} />
                                     </div>
 
                                     <div>
                                         <h1 style={{ marginLeft: '30px' }}>TIME *</h1>
-                                        <input id='cert_time_input' placeholder='3:30 PM' value={this.state.currentTime} onChange={(text) => this.setState({ currentTime: text.target.value })} style={{ alignSelf: 'flex-end' }} />
+                                        <input placeholder='3:30 PM...' value={this.state.currentTime} onChange={(text) => this.setState({ currentTime: text.target.value })} style={{ alignSelf: 'flex-end' }} />
                                     </div>
                                 </section>
-                                {this.state.currentDate && this.state.currentTime && this.state.storeNumber && this.state.customerName ?
+                                {this.state.currentDate && this.state.currentTime && this.state.storeNumber && this.state.customerName && this.state.licensePlate ?
                                     <button onClick={() => this.redeemCertificate()} style={{ backgroundColor: '#42EA1A' }}>Redeem</button>
                                     :
                                     <button style={{ backgroundColor: 'dimgray' }} onClick={() => document.getElementById('uncomplete_text_controller').style.display = 'block'}>Redeem</button>}
@@ -275,7 +283,6 @@ export class UnRedeemCertificate extends React.Component {
         tempCertificate.nameOfRedemption = null;
         tempCertificate.storeRedeemed = null;
         tempCertificate.dateRedeemed = null;
-        tempCertificate.timeRedeemed = null;
         tempCertificate.status = 'Redeemable';
         purchasedCertificates.forEach((certificate, index) => {
             if (certificate.number === this.props.certificateInfo.number)

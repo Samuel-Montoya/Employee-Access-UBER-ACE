@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
-import JiffyLubeLogo from '../../resources/JiffyLubeLogo.svg'
+import JiffyLubeLogo from '../../resources/JiffyLubeLogo.png'
 
 export default class Login extends React.Component {
     render() {
@@ -9,7 +9,7 @@ export default class Login extends React.Component {
             <div className='login_page_page-container'>
                 <img
                     className='login_page_logo'
-                    src={'http://logo-load.com/uploads/posts/2016-03/1459331294_jiffy-lube-logo.png'}
+                    src={JiffyLubeLogo}
                     alt='' />
 
                 <div className='login_page_login-container'>
