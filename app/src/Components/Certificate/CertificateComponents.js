@@ -128,7 +128,7 @@ let RedeemContainer = styled.div`
             align-items: flex-start;
 
             h1 {
-                font-size: 18px;
+                font-size: 17px;
                 color: #8e0e34;
             }
 
@@ -141,6 +141,20 @@ let RedeemContainer = styled.div`
                 padding: 0 0 0 10px;
                 border: 1px solid #8E0E34;
             }
+
+            select {
+                width: 90%;
+                height: 40px;
+                margin-top: 10px;
+                font-size: 16px;
+                padding: 0 0 0 10px;
+                align-self: flex-end;
+                border-radius: 0;
+                appearance: none;
+                background-position: right 50%;
+                background-repeat: no-repeat;
+                background-image: url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%20%3C%21DOCTYPE%20svg%20PUBLIC%20%22-//W3C//DTD%20SVG%201.1//EN%22%20%22http%3A//www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd%22%3E%20%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2214px%22%20height%3D%2212px%22%20viewBox%3D%220%200%2014%2012%22%20enable-background%3D%22new%200%200%2014%2012%22%20xml%3Aspace%3D%22preserve%22%3E%20%3Cpolygon%20points%3D%223.862%2C7.931%200%2C4.069%207.725%2C4.069%20%22/%3E%3C/svg%3E);
+            }
         }
     }
 `;
@@ -152,6 +166,7 @@ export class RedeemCertificate extends React.Component {
             didRedeem: false,
             customerName: '',
             licensePlate: '',
+            carState: '',
             storeNumber: 937,
             currentDate: new Date().toLocaleDateString(),
             currentTime: new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
@@ -169,6 +184,7 @@ export class RedeemCertificate extends React.Component {
         tempCertificate.storeRedeemed = this.state.storeNumber;
         tempCertificate.dateRedeemed = time._d;
         tempCertificate.licensePlate = '4DFA3G';
+        tempCertificate.carState = this.state.carState;
         tempCertificate.status = 'Redeemed';
         purchasedCertificates.forEach((certificate, index) => {
             if (certificate.number === this.props.certificateInfo.number)
@@ -180,6 +196,7 @@ export class RedeemCertificate extends React.Component {
     }
 
     render() {
+        console.log(this.state)
         return (
             <PopupContainer>
                 <PopupContent>
@@ -202,8 +219,65 @@ export class RedeemCertificate extends React.Component {
                                     </div>
 
                                     <div>
-                                        <h1 style={{ marginLeft: '30px' }}>LICENSE PLATE *</h1>
+                                        <h1 style={{ marginLeft: '22px' }}>LICENSE PLATE *</h1>
                                         <input placeholder='License Plate #...' value={this.state.licensePlate} onChange={(text) => this.setState({ licensePlate: text.target.value.toUpperCase() })} style={{ alignSelf: 'flex-end' }} />
+                                    </div>
+
+                                    <div>
+                                        <h1 style={{ marginLeft: '22px' }}>STATE *</h1>
+                                        <select value={this.state.carState} onChange={(selected) => this.setState({ carState: selected.target.value })}>
+                                            <option value="AL">Alabama</option>
+                                            <option value="AK">Alaska</option>
+                                            <option value="AZ">Arizona</option>
+                                            <option value="AR">Arkansas</option>
+                                            <option value="CA">California</option>
+                                            <option value="CO">Colorado</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="DC">District Of Columbia</option>
+                                            <option value="FL">Florida</option>
+                                            <option value="GA">Georgia</option>
+                                            <option value="HI">Hawaii</option>
+                                            <option value="ID">Idaho</option>
+                                            <option value="IL">Illinois</option>
+                                            <option value="IN">Indiana</option>
+                                            <option value="IA">Iowa</option>
+                                            <option value="KS">Kansas</option>
+                                            <option value="KY">Kentucky</option>
+                                            <option value="LA">Louisiana</option>
+                                            <option value="ME">Maine</option>
+                                            <option value="MD">Maryland</option>
+                                            <option value="MA">Massachusetts</option>
+                                            <option value="MI">Michigan</option>
+                                            <option value="MN">Minnesota</option>
+                                            <option value="MS">Mississippi</option>
+                                            <option value="MO">Missouri</option>
+                                            <option value="MT">Montana</option>
+                                            <option value="NE">Nebraska</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="NH">New Hampshire</option>
+                                            <option value="NJ">New Jersey</option>
+                                            <option value="NM">New Mexico</option>
+                                            <option value="NY">New York</option>
+                                            <option value="NC">North Carolina</option>
+                                            <option value="ND">North Dakota</option>
+                                            <option value="OH">Ohio</option>
+                                            <option value="OK">Oklahoma</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="PA">Pennsylvania</option>
+                                            <option value="RI">Rhode Island</option>
+                                            <option value="SC">South Carolina</option>
+                                            <option value="SD">South Dakota</option>
+                                            <option value="TN">Tennessee</option>
+                                            <option value="TX">Texas</option>
+                                            <option value="UT">Utah</option>
+                                            <option value="VT">Vermont</option>
+                                            <option value="VA">Virginia</option>
+                                            <option value="WA">Washington</option>
+                                            <option value="WV">West Virginia</option>
+                                            <option value="WI">Wisconsin</option>
+                                            <option value="WY">Wyoming</option>
+                                        </select>
                                     </div>
                                 </section>
 
@@ -214,12 +288,12 @@ export class RedeemCertificate extends React.Component {
                                     </div>
 
                                     <div>
-                                        <h1 style={{ marginLeft: '30px' }}>STORE *</h1>
+                                        <h1 style={{ marginLeft: '22px' }}>STORE *</h1>
                                         <input placeholder='947...' value={this.state.storeNumber} onChange={(text) => this.setState({ storeNumber: text.target.value })} style={{ alignSelf: 'flex-end' }} />
                                     </div>
 
                                     <div>
-                                        <h1 style={{ marginLeft: '30px' }}>TIME *</h1>
+                                        <h1 style={{ marginLeft: '22px' }}>TIME *</h1>
                                         <input placeholder='3:30 PM...' value={this.state.currentTime} onChange={(text) => this.setState({ currentTime: text.target.value })} style={{ alignSelf: 'flex-end' }} />
                                     </div>
                                 </section>
@@ -283,6 +357,8 @@ export class UnRedeemCertificate extends React.Component {
         tempCertificate.nameOfRedemption = null;
         tempCertificate.storeRedeemed = null;
         tempCertificate.dateRedeemed = null;
+        tempCertificate.licensePlate = null;
+        tempCertificate.carState = null;
         tempCertificate.status = 'Redeemable';
         purchasedCertificates.forEach((certificate, index) => {
             if (certificate.number === this.props.certificateInfo.number)

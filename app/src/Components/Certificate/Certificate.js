@@ -228,6 +228,7 @@ export default class Certificate extends React.Component {
 
                     <HeaderButtonContainer>
                         <button style={{ backgroundColor: '#65B3FF' }}>View Profile</button>
+                        <button style={{ backgroundColor: '#ce2b2b' }}>View UnRedeemed History</button>
                         {this.state.certificateInfo.status === 'Redeemable'
                             ?
                             <button onClick={() => this.setState({ showRedeemInfo: true })} style={{ backgroundColor: '#48d20e' }}>Redeem Certificate</button>
@@ -327,7 +328,7 @@ export default class Certificate extends React.Component {
 
                                 <section>
                                     <h1>LICENSE PLATE</h1>
-                                    <h2>{this.state.certificateInfo.licensePlate}</h2>
+                                    <h2>{this.state.certificateInfo.licensePlate}, {this.state.certificateInfo.carState}</h2>
                                 </section>
 
                                 <section>
