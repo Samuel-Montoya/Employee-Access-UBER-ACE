@@ -1,12 +1,29 @@
 .header_container {
     width: 100vw;
     height: 100px;
-    background: linear-gradient(#ca003a, #98012e);
+    background-color: rgb(134, 38, 51);
     display: flex;
     justify-content: space-between;
     position: fixed;
-    box-shadow: 1px 1px 1px 1px rgb(80, 7, 29);
     z-index: 10;
+}
+
+@media only screen and (max-width: 1300px) {
+    .header_container {
+        height: 80px;
+    }
+    .header_options_container {
+        height: 35px !important;
+        width: 125px !important;
+        font-size: 12px;
+    }
+    .logo_container {
+        font-size: 14px !important;
+    }
+    .logo_container img {
+        width: 150px !important;
+        height: 35px !important;
+    }
 }
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
@@ -23,8 +40,8 @@
     align-items: center;
     margin-left: 30px;
     color: white;
-    font-family: 'Arial Black', sans-serif;
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: bold;
 }
   
 .logo_container img {

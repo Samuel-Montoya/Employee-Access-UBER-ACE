@@ -16,6 +16,10 @@ let PopupContainer = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.4);
+
+    @media only screen and (max-width: 1300px) {
+        margin-top: 80px !important;
+    }
 `;
 let animatetop = keyframes`
     0% {top:-300px; opacity:0;}
@@ -26,7 +30,7 @@ let PopupContent = styled.section`
     min-width: 900px;
     width: 50%;
     height: 350px;
-    margin-top: 200px;
+    margin-top: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;

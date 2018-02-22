@@ -15,22 +15,11 @@ let PageContainer = styled.div`
     background-color: rgb(245, 245, 245);
     min-height: 100%;
 
-    button {
-        border: none;
-        width: 25%;
-        min-width: 250px;
-        height: 50px;
-        font-size: 16px;
-        color: white;
-        font-weight: bolder;
-        transition: all 0.2s ease;
-    }
-
-    button:hover {
-        box-shadow: 0px -6px 0px rgba(0, 0, 0, 0.3) inset;
-    }
-    button:active {
-        box-shadow: 0px -6px 0px rgba(0, 0, 0, 0.5) inset;
+    @media only screen and (max-width: 1300px) {
+        button { 
+            height: 45px !important;
+            font-size: 14px !important;
+        }
     }
 `;
 let CertHeaderContainer = styled.div`
@@ -42,16 +31,9 @@ let CertHeaderContainer = styled.div`
     margin-bottom: 20px;
     position: relative;
 
-    div {
-        width: 150px;
-        height: 80%;
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        position: absolute;
-        font-size: 18px;
-        color: white;
-        background-color: #505050;
+    @media only screen and (max-width: 1300px) {
+        min-width: 800px !important;
+        margin-top: 100px !important;
     }
 `;
 let HeaderButtonContainer = styled.section`
@@ -61,9 +43,26 @@ let HeaderButtonContainer = styled.section`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+
+    @media only screen and (max-width: 1300px) {
+        min-width: 800px !important;
+    }
 `;
 let BackButtonContainer = styled.div`
+    width: 60%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    background-color: #505050;
     transition: all 0.2s ease;
+
+    @media only screen and (max-width: 1300px) {
+        height: 45px !important;
+        font-size: 14px !important;
+    }
+
     img {    
         width: 25%;
         height: 80%;
@@ -81,6 +80,25 @@ let Title = styled.h1`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media only screen and (max-width: 1300px) {
+        font-size: 28px !important;
+    }
+`;
+let HeaderButton = styled.button`
+    border: none;
+    width: 25%;
+    min-width: 250px;
+    height: 50px;
+    font-size: 16px;
+    color: white;
+    transition: all 0.3s ease;
+    border: 1px solid ${props => props.color} !important;
+    background-color: ${props => props.color};
+    &:hover {
+        background-color: rgba(0,0,0,0);
+        color: ${props => props.color};
+    }
 `;
 let CertInformationContainer = styled.section`
     min-width: 900px;
@@ -92,6 +110,13 @@ let CertInformationContainer = styled.section`
     box-shadow: 2px 2px 5px rgb(163, 163, 163);
     margin-bottom: 40px;
     background-color: white;
+
+    @media only screen and (max-width: 1300px) {
+        min-width: 800px !important;
+
+        header { font-size: 16px !important; }
+        section { font-size: 16px !important; }
+    }
 
     header {
         width: 100%;
@@ -217,23 +242,29 @@ export default class Certificate extends React.Component {
                 <Header displayStatus={true} />
                 <PageContainer>
                     <CertHeaderContainer>
+                        {/* <Link to='/search'>
+                            <BackButtonContainer>
+                                <img src='https://www.materialui.co/materialIcons/navigation/arrow_back_white_192x192.png' alt='' />
+                                <h1>BACK</h1>
+                            </BackButtonContainer>
+                        </Link> */}
+                        <Title>CERTIFICATE #{this.state.certificateInfo.number}</Title>
+                    </CertHeaderContainer>
+
+                    <HeaderButtonContainer>
+                        {/* <HeaderButton color='#65B3FF'>View Profile</HeaderButton>
+                        <HeaderButton color='#ce2b2b'>View UnRedeemed History</HeaderButton> */}
                         <Link to='/search'>
                             <BackButtonContainer>
                                 <img src='https://www.materialui.co/materialIcons/navigation/arrow_back_white_192x192.png' alt='' />
                                 <h1>BACK</h1>
                             </BackButtonContainer>
                         </Link>
-                        <Title>CERTIFICATE #{this.state.certificateInfo.number}</Title>
-                    </CertHeaderContainer>
-
-                    <HeaderButtonContainer>
-                        <button style={{ backgroundColor: '#65B3FF' }}>View Profile</button>
-                        <button style={{ backgroundColor: '#ce2b2b' }}>View UnRedeemed History</button>
                         {this.state.certificateInfo.status === 'Redeemable'
                             ?
-                            <button onClick={() => this.setState({ showRedeemInfo: true })} style={{ backgroundColor: '#48d20e' }}>Redeem Certificate</button>
+                            <HeaderButton color='#48d20e' onClick={() => this.setState({ showRedeemInfo: true })}>Redeem Certificate</HeaderButton>
                             :
-                            <button onClick={() => { this.setState({ showUnRedeemInfo: true }) }} style={{ backgroundColor: '#BC1B4B' }}>Unredeem Certificate</button>
+                            <HeaderButton color='#BC1B4B' onClick={() => { this.setState({ showUnRedeemInfo: true }) }}>Unredeem Certificate</HeaderButton>
                         }
                     </HeaderButtonContainer>
 

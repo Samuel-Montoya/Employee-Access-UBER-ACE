@@ -10,6 +10,26 @@ let SearchContainer = styled.div`
     justify-content: flex-start;
     align-items: center;
 
+    @media only screen and (max-width: 1300px) {
+        input {
+            width: 50% !important;
+            height: 35px !important;
+            font-size: 14px !important;
+        }
+
+        button {
+            width: 100px !important;
+            height: 35px !important;
+            font-size: 14px !important;
+        }
+
+        select {
+            width: 180px !important;
+            height: 35px !important;
+            font-size: 14px !important;
+        }
+    }
+
     input {
         width: 50%;
         height: 40px;

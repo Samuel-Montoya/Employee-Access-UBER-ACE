@@ -24,7 +24,7 @@ export default class Login extends React.Component {
                     </Link>
                 </div>
 
-                <footer className='login_page_footer'>Copyright Stuff, Terms and Agreements, Things like that....</footer>
+                <footer className='login_page_footer'>Copyright ©</footer>
             </div>
         )
     }
