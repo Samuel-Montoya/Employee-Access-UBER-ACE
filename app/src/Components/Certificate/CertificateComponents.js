@@ -95,9 +95,9 @@ export class BackToSearch extends React.Component {
             <PopupBody>
                 <BackToSearchContainer>
                     <h1>Certificate has been updated.</h1>
-                    <button style={{ backgroundColor: '#63b3ff' }} onClick={() => this.props.updateState(this.props.displayContainer, false)}>View Certificate</button>
+                    <RedeemButton color='#63b3ff' onClick={() => this.props.updateState(this.props.displayContainer, false)}>View Certificate</RedeemButton>
                     <Link style={{ width: '100%' }} to='/search'>
-                        <button style={{ backgroundColor: '#8E0E34', cursor: 'pointer' }}>Back To Search</button>
+                        <RedeemButton color='#8E0E34' style={{ cursor: 'pointer' }}>Back To Search</RedeemButton>
                     </Link>
                 </BackToSearchContainer>
             </PopupBody>
@@ -112,11 +112,6 @@ let RedeemContainer = styled.div`
     align-items: center;
     font-size: 24px;
     font-weight: lighter;
-
-    button {
-        width: 80% !important;
-        margin: 10px 0 10px 0;
-    }
     
     section {
         width: 80%;
@@ -160,6 +155,21 @@ let RedeemContainer = styled.div`
                 background-image: url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%20%3C%21DOCTYPE%20svg%20PUBLIC%20%22-//W3C//DTD%20SVG%201.1//EN%22%20%22http%3A//www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd%22%3E%20%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2214px%22%20height%3D%2212px%22%20viewBox%3D%220%200%2014%2012%22%20enable-background%3D%22new%200%200%2014%2012%22%20xml%3Aspace%3D%22preserve%22%3E%20%3Cpolygon%20points%3D%223.862%2C7.931%200%2C4.069%207.725%2C4.069%20%22/%3E%3C/svg%3E);
             }
         }
+    }
+`;
+
+let RedeemButton = styled.button `
+    width: 80% !important;
+    margin: 10px 0 10px 0;
+    border: 1px solid ${props => props.color};
+    background-color: ${props => props.color};
+    color: white;
+    height: 40px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: white;
+        color: ${props => props.color};
     }
 `;
 export class RedeemCertificate extends React.Component {
@@ -302,9 +312,9 @@ export class RedeemCertificate extends React.Component {
                                     </div>
                                 </section>
                                 {this.state.currentDate && this.state.currentTime && this.state.storeNumber && this.state.customerName && this.state.licensePlate ?
-                                    <button onClick={() => this.redeemCertificate()} style={{ backgroundColor: '#42EA1A' }}>Redeem</button>
+                                    <RedeemButton onClick={() => this.redeemCertificate()} color= '#42EA1A'>Redeem</RedeemButton>
                                     :
-                                    <button style={{ backgroundColor: 'dimgray' }} onClick={() => document.getElementById('uncomplete_text_controller').style.display = 'block'}>Redeem</button>}
+                                    <RedeemButton color='dimgray' onClick={() => document.getElementById('uncomplete_text_controller').style.display = 'block'}>Redeem</RedeemButton>}
                             </RedeemContainer>
                         </PopupBody>
                     }
@@ -388,8 +398,8 @@ export class UnRedeemCertificate extends React.Component {
                             <UnRedeemContainer>
                                 <h1>Provide a reason for unredemption:</h1>
                                 <textarea onChange={(text) => this.setState({ reasonText: text.target.value })} />
-                                {this.state.reasonText ? <button style={{ backgroundColor: '#48d20e' }} onClick={() => this.unredeemCertificate()}>Unredeem</button>
-                                    : <button style={{ backgroundColor: 'dimgray' }}>Unredeem</button>}
+                                {this.state.reasonText ? <RedeemButton color='#48d20e' onClick={() => this.unredeemCertificate()}>Unredeem</RedeemButton>
+                                    : <RedeemButton color='dimgray'>Unredeem</RedeemButton>}
                             </UnRedeemContainer>
                         </PopupBody>
                     }

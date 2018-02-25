@@ -1,8 +1,8 @@
 import React from 'react'
 import './Dashboard.css'
 import Header from '../Header/Header';
-import { purchasedCertificates } from '../../PurchasedCertificates'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { scroller } from 'react-scroll';
 
 export default class Dashboard extends React.Component {
@@ -11,23 +11,26 @@ export default class Dashboard extends React.Component {
 
     this.state = {
       certificatesToDisplay: [],
-      searchFilter: 'number',
+      purchasedCertificates: [],
+      productTitle: '',
+      searchFilter: 'certificate_number',
       searchText: '',
-      hasSearched: false
+      hasSearched: false,
+      jsx: ''
     }
   }
 
   filterCertificates = () => {
     if (this.state.searchText) {
       this.setState({
-        certificatesToDisplay: purchasedCertificates.filter((certificate, index) => {
+        certificatesToDisplay: this.state.purchasedCertificates.filter((certificate, index) => {
           let tempCertificate;
-          if (this.state.searchFilter !== 'number') {
+          if (this.state.searchFilter !== 'certificate_number') {
             if (certificate[this.state.searchFilter].toLowerCase().includes(this.state.searchText.toLowerCase()))
               tempCertificate = certificate;
           }
           else {
-            if (certificate[this.state.searchFilter] === Number(this.state.searchText))
+            if (certificate[this.state.searchFilter] === this.state.searchText)
               tempCertificate = certificate;
           }
           return tempCertificate;
@@ -44,6 +47,15 @@ export default class Dashboard extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    axios.get('http://localhost:5000/api/getAllCertificates').then((response => {
+      axios.get('http://localhost:5000/api/getAllProducts').then(products => {
+        this.setState({
+          purchasedCertificates: response.data,
+          allProducts: products.data
+        })
+      })
+    }))
+
     if (this.props.location.query) {
       if (this.props.location.query.resultsToShow === false) {
         this.setState({ hasSearched: true })
@@ -65,6 +77,7 @@ export default class Dashboard extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div>
         <Header displayStatus={false} />
@@ -75,7 +88,7 @@ export default class Dashboard extends React.Component {
               <input value={this.state.searchText
               } onChange={(input) => { if (input.target.value) { this.setState({ searchText: input.target.value }) } else this.setState({ searchText: '', certificatesToDisplay: [] }) }} placeholder='Search...' />
               <select value={this.state.searchFilter} onChange={(input) => this.setState({ searchFilter: input.target.value })}>
-                <option value="number">Certificate Number</option>
+                <option value="certificate_number">Certificate Number</option>
                 <option value="email">Email</option>
                 <option value="nameOfBuyer">Name</option>
                 <option value="phoneNumber">Phone Number</option>
@@ -104,6 +117,7 @@ export default class Dashboard extends React.Component {
   allCertificates = () => {
     if (this.state.certificatesToDisplay.length) {
       return this.state.certificatesToDisplay.map((certificate, index) => {
+        let productTitle = this.state.allProducts.filter(product => product.product_number === certificate.product_number)
         let color = '#4ED767';
         let icon = 'fa fa-check-circle fa-2x';
         if (certificate.status === 'Redeemed') {
@@ -111,16 +125,17 @@ export default class Dashboard extends React.Component {
           icon = 'fa fa-times-circle fa-2x';
         }
         return (
-          <Link key={index} to={{ pathname: '/certificate/' + certificate.number, query: { certificateInfo: certificate } }}>
+          <Link key={index} to={{ pathname: '/certificate/' + certificate.certificate_number, query: { certificateInfo: certificate } }}>
             <div className='dashboard_certificate_container'>
-              <h1>{certificate.title}</h1>
+              <h1>{productTitle[0].product_title}</h1>
               <h2 style={{ fontWeight: 'bolder', color: color }}>{certificate.status}</h2>
-              <h3>{certificate.nameOfBuyer}</h3>
-              <h4>{certificate.number}</h4>
+              <h3>{certificate.buyer_name}</h3>
+              <h4>{certificate.certificate_number}</h4>
               <i className={icon} style={{ color: color }} />
             </div>
           </Link>)
-      })
-    }
+    })
   }
+  }
+
 }
