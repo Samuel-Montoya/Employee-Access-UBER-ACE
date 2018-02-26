@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { purchasedCertificates } from '../../PurchasedCertificates';
 import Header from '../Header/Header';
 import moment from 'moment';
 import styled from 'styled-components';
 import { RedeemCertificate, UnRedeemCertificate } from './CertificateComponents';
 import 'babel-polyfill';
+import axios from 'axios';
 
 let PageContainer = styled.div`
     width: 100vw;
@@ -211,19 +211,9 @@ export default class Certificate extends React.Component {
                 certificateInfo: this.props.location.query.certificateInfo
             })
         } else {
-            for (let certificate of purchasedCertificates) {
-                if (certificate.number === Number(newCertificateNumber)) {
-                    this.setState({
-                        certificateInfo: certificate,
-                        shouldRedirect: false
-                    });
-                    break;
-                } else {
-                    this.setState({
-                        shouldRedirect: true
-                    })
-                }
-            }
+            axios.get('http://localhost:5000/api/getAllCertificates').then((response => {
+                console.log(response.data)
+              }))
         }
     }
 
@@ -237,6 +227,7 @@ export default class Certificate extends React.Component {
         if (this.state.shouldRedirect) {
             return <Redirect to={{ pathname: '/search', query: { resultsToShow: false } }} />
         }
+        console.log(this.state)
         return (
             <div style={{ height: '100vh' }}>
                 <Header displayStatus={true} />
@@ -248,7 +239,7 @@ export default class Certificate extends React.Component {
                                 <h1>BACK</h1>
                             </BackButtonContainer>
                         </Link> */}
-                        <Title>CERTIFICATE #{this.state.certificateInfo.number}</Title>
+                        <Title>CERTIFICATE #{this.state.certificateInfo.certificate_number}</Title>
                     </CertHeaderContainer>
 
                     <HeaderButtonContainer>
@@ -274,7 +265,7 @@ export default class Certificate extends React.Component {
                     <CertInformationContainer>
                         <header>
                             <h1>CERTIFICATE INFORMATION</h1>
-                            <h2>#{this.state.certificateInfo.number}</h2>
+                            <h2>#{this.state.certificateInfo.certificate_number}</h2>
                         </header>
 
                         <div>
@@ -290,12 +281,12 @@ export default class Certificate extends React.Component {
 
                             <section style={{ width: '20%', marginRight: '5%' }}>
                                 <h1>PURCHASE DATE</h1>
-                                <h2>{this.state.certificateInfo.datePurchased}</h2>
+                                <h2>{this.state.certificateInfo.purchase_date}</h2>
                             </section>
 
                             <section style={{ width: '25%' }}>
                                 <h1>EXPIRATION DATE</h1>
-                                <h2>12/04/2018</h2>
+                                <h2>{this.state.certificateInfo.expiration_date}</h2>
                             </section>
                         </div>
 
@@ -324,17 +315,17 @@ export default class Certificate extends React.Component {
                         <div>
                             <section>
                                 <h1>FULL NAME</h1>
-                                <h2>{this.state.certificateInfo.nameOfBuyer}</h2>
+                                <h2>{this.state.certificateInfo.buyer_name}</h2>
                             </section>
 
                             <section>
                                 <h1>EMAIL</h1>
-                                <h2>{this.state.certificateInfo.email}</h2>
+                                <h2>{this.state.certificateInfo.buyer_email}</h2>
                             </section>
 
                             <section>
                                 <h1>PHONE</h1>
-                                <h2>{this.state.certificateInfo.phoneNumber}</h2>
+                                <h2>{this.state.certificateInfo.buyer_phone}</h2>
                             </section>
                         </div>
 

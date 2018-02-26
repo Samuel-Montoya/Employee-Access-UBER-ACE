@@ -90,8 +90,8 @@ export default class Dashboard extends React.Component {
               <select value={this.state.searchFilter} onChange={(input) => this.setState({ searchFilter: input.target.value })}>
                 <option value="certificate_number">Certificate Number</option>
                 <option value="email">Email</option>
-                <option value="nameOfBuyer">Name</option>
-                <option value="phoneNumber">Phone Number</option>
+                <option value="buyer_name">Name</option>
+                <option value="phone">Phone Number</option>
               </select>
             </section>
             <hr />

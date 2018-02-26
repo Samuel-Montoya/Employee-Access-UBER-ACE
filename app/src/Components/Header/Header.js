@@ -83,7 +83,7 @@ export default class Header extends React.Component {
 
         this.state = {
             searchInput: '',
-            searchFilter: 'number'
+            searchFilter: 'certificate_number'
         }
     }
     render() {
@@ -111,10 +111,10 @@ export default class Header extends React.Component {
                                 </Link> : <button>Search</button>
                         }
                         <select onChange={(input) => this.setState({ searchFilter: input.target.value })}>
-                            <option value="number">Certificate Number</option>
-                            <option value="email">Email</option>
-                            <option value="nameOfBuyer">Name</option>
-                            <option value="phoneNumber">Phone Number</option>
+                            <option value="certificate_number">Certificate Number</option>
+                            <option value="buyer_email">Email</option>
+                            <option value="buyer_name">Name</option>
+                            <option value="buyer_phone">Phone Number</option>
                         </select>
                     </SearchContainer>}
 
