@@ -178,6 +178,7 @@ export default class Certificate extends React.Component {
 
         this.state = {
             certificateInfo: {},
+            productTitle: '',
             isOpen: false,
             currentDate: '',
             currentTime: '',
@@ -208,12 +209,23 @@ export default class Certificate extends React.Component {
 
         if (this.props.location.query && !fromHeader) {
             this.setState({
-                certificateInfo: this.props.location.query.certificateInfo
+                certificateInfo: this.props.location.query.certificateInfo,
+                productTitle: this.props.location.query.certificateInfo.product_title
             })
         } else {
-            axios.get('http://localhost:5000/api/getAllCertificates').then((response => {
-                console.log(response.data)
-              }))
+            axios.get('http://localhost:5000/api/getAllCertificates').then(allCertificates => {
+                let certificate = allCertificates.data.filter(certificate => certificate.certificate_number === newCertificateNumber)[0]
+                if (certificate) {
+                    axios.get('http://localhost:5000/api/getProductByID/' + certificate.product_number).then(product => {
+                        this.setState({
+                            certificateInfo: certificate,
+                            productTitle: product.data.product_title
+                        })
+                    })
+                } else {
+                    this.setState({ shouldRedirect: true })
+                }
+            })
         }
     }
 
@@ -227,7 +239,6 @@ export default class Certificate extends React.Component {
         if (this.state.shouldRedirect) {
             return <Redirect to={{ pathname: '/search', query: { resultsToShow: false } }} />
         }
-        console.log(this.state)
         return (
             <div style={{ height: '100vh' }}>
                 <Header displayStatus={true} />
@@ -271,7 +282,7 @@ export default class Certificate extends React.Component {
                         <div>
                             <section style={{ width: '30%' }}>
                                 <h1>PRODUCT</h1>
-                                <h2>{this.state.certificateInfo.title}</h2>
+                                <h2>{this.state.productTitle}</h2>
                             </section>
 
                             <section style={{ width: '20%' }}>
@@ -281,12 +292,12 @@ export default class Certificate extends React.Component {
 
                             <section style={{ width: '20%', marginRight: '5%' }}>
                                 <h1>PURCHASE DATE</h1>
-                                <h2>{this.state.certificateInfo.purchase_date}</h2>
+                                <h2>{moment(this.state.certificateInfo.purchase_date).format('L')}</h2>
                             </section>
 
                             <section style={{ width: '25%' }}>
                                 <h1>EXPIRATION DATE</h1>
-                                <h2>{this.state.certificateInfo.expiration_date}</h2>
+                                <h2>{moment(this.state.certificateInfo.expiration_date).format('L')}</h2>
                             </section>
                         </div>
 
@@ -340,22 +351,22 @@ export default class Certificate extends React.Component {
                             <div>
                                 <section>
                                     <h1>FULL NAME</h1>
-                                    <h2>{this.state.certificateInfo.nameOfRedemption}</h2>
+                                    <h2>{this.state.certificateInfo.redeemer_name}</h2>
                                 </section>
 
                                 <section>
                                     <h1>STORE</h1>
-                                    <h2>#{this.state.certificateInfo.storeRedeemed}</h2>
+                                    <h2>#{this.state.certificateInfo.redemption_store}</h2>
                                 </section>
 
                                 <section>
                                     <h1>LICENSE PLATE</h1>
-                                    <h2>{this.state.certificateInfo.licensePlate}, {this.state.certificateInfo.carState}</h2>
+                                    <h2>{this.state.certificateInfo.license_plate}, {this.state.certificateInfo.vehicle_state}</h2>
                                 </section>
 
                                 <section>
                                     <h1>WHEN</h1>
-                                    <h2>{moment(this.state.certificateInfo.dateRedeemed).format('dddd, MMMM Do YYYY')} - {moment(this.state.certificateInfo.dateRedeemed).format('h:mm a')}<br />{moment(this.state.certificateInfo.dateRedeemed).fromNow()}</h2>
+                                    <h2>{moment(this.state.certificateInfo.redemption_date).format('dddd, MMMM Do YYYY')} - {moment(this.state.certificateInfo.redemption_date).format('h:mm a')}<br />{moment(this.state.certificateInfo.redemption_date).fromNow()}</h2>
                                 </section>
                             </div>
                         </CertInformationContainer>}

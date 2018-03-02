@@ -101,7 +101,7 @@ export default class Header extends React.Component {
                 {this.props.displayStatus &&
                     <SearchContainer>
                         <input onChange={(text) => this.setState({ searchInput: text.target.value })} placeholder='Search...' />
-                        {this.state.searchFilter === 'number' && this.state.searchInput ?
+                        {this.state.searchFilter === 'certificate_number' && this.state.searchInput ?
                             <Link to={'/certificate/' + this.state.searchInput}>
                                 <button>Search</button>
                             </Link>

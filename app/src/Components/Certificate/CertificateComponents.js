@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { purchasedCertificates } from '../../PurchasedCertificates';
 import styled, { keyframes } from 'styled-components';
 import moment from 'moment';
+import axios from 'axios';
 
 
 let PopupContainer = styled.div`
@@ -114,7 +114,7 @@ let RedeemContainer = styled.div`
     font-weight: lighter;
     
     section {
-        width: 80%;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         margin: 10px 0 10px 0;
@@ -158,13 +158,14 @@ let RedeemContainer = styled.div`
     }
 `;
 
-let RedeemButton = styled.button `
-    width: 80% !important;
+let RedeemButton = styled.button`
+    width: 100% !important;
     margin: 10px 0 10px 0;
     border: 1px solid ${props => props.color};
     background-color: ${props => props.color};
     color: white;
     height: 40px;
+    font-size: 14px;
     transition: all 0.3s ease;
 
     &:hover {
@@ -180,7 +181,7 @@ export class RedeemCertificate extends React.Component {
             didRedeem: false,
             customerName: '',
             licensePlate: '',
-            carState: '',
+            carState: 'AL',
             storeNumber: 937,
             currentDate: new Date().toLocaleDateString(),
             currentTime: new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
@@ -188,29 +189,23 @@ export class RedeemCertificate extends React.Component {
     }
 
     redeemCertificate = () => {
-        let tempCertificate;
+        let tempCertificate = Object.assign({}, this.props.certificateInfo)
         let time = moment(this.state.currentDate + ' ' + this.state.currentTime, "MM-DD-YYYY h:mm a")
-        purchasedCertificates.forEach(certificate => {
-            if (certificate.number === this.props.certificateInfo.number)
-                tempCertificate = Object.assign({}, certificate)
-        })
-        tempCertificate.nameOfRedemption = this.state.customerName;
-        tempCertificate.storeRedeemed = this.state.storeNumber;
-        tempCertificate.dateRedeemed = time._d;
-        tempCertificate.licensePlate = '4DFA3G';
-        tempCertificate.carState = this.state.carState;
-        tempCertificate.status = 'Redeemed';
-        purchasedCertificates.forEach((certificate, index) => {
-            if (certificate.number === this.props.certificateInfo.number)
-                purchasedCertificates[index] = tempCertificate;
-        })
 
-        this.props.updateState('certificateInfo', tempCertificate);
-        this.setState({ didRedeem: true })
+        tempCertificate.redeemer_name = this.state.customerName;
+        tempCertificate.redemption_store = this.state.storeNumber;
+        tempCertificate.redemption_date = time._d;
+        tempCertificate.license_plate = this.state.licensePlate;
+        tempCertificate.vehicle_state = this.state.carState;
+        tempCertificate.status = 'Redeemed';
+        axios.post('http://localhost:5000/api/updateCertificate', tempCertificate).then(response => {
+
+            this.props.updateState('certificateInfo', response.data);
+            this.setState({ didRedeem: true })
+        })
     }
 
     render() {
-        console.log(this.state)
         return (
             <PopupContainer>
                 <PopupContent>
@@ -312,7 +307,7 @@ export class RedeemCertificate extends React.Component {
                                     </div>
                                 </section>
                                 {this.state.currentDate && this.state.currentTime && this.state.storeNumber && this.state.customerName && this.state.licensePlate ?
-                                    <RedeemButton onClick={() => this.redeemCertificate()} color= '#42EA1A'>Redeem</RedeemButton>
+                                    <RedeemButton onClick={() => this.redeemCertificate()} color='#42EA1A'>Redeem</RedeemButton>
                                     :
                                     <RedeemButton color='dimgray' onClick={() => document.getElementById('uncomplete_text_controller').style.display = 'block'}>Redeem</RedeemButton>}
                             </RedeemContainer>
@@ -363,23 +358,18 @@ export class UnRedeemCertificate extends React.Component {
     }
 
     unredeemCertificate = () => {
-        let tempCertificate;
-        purchasedCertificates.forEach(certificate => {
-            if (certificate.number === this.props.certificateInfo.number)
-                tempCertificate = Object.assign({}, certificate)
-        })
-        tempCertificate.nameOfRedemption = null;
-        tempCertificate.storeRedeemed = null;
-        tempCertificate.dateRedeemed = null;
-        tempCertificate.licensePlate = null;
-        tempCertificate.carState = null;
+        let tempCertificate = Object.assign({}, this.props.certificateInfo)
+
+        tempCertificate.redeemer_name = null;
+        tempCertificate.redemption_store = null;
+        tempCertificate.redemption_date = null;
+        tempCertificate.license_plate = null;
+        tempCertificate.vehicle_state = null;
         tempCertificate.status = 'Redeemable';
-        purchasedCertificates.forEach((certificate, index) => {
-            if (certificate.number === this.props.certificateInfo.number)
-                purchasedCertificates[index] = tempCertificate;
+        axios.post('http://localhost:5000/api/updateCertificate', tempCertificate).then(response => {
+            this.props.updateState('certificateInfo', response.data);
+            this.setState({ didUnredeem: true })
         })
-        this.setState({ didUnredeem: true })
-        this.props.updateState('certificateInfo', tempCertificate)
     }
 
     render() {
