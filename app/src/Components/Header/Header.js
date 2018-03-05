@@ -3,6 +3,8 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 import Logout from '../../resources/Logout.png'
 import styled from 'styled-components';
+import { setLoginStatus} from '../../Redux/reducer';
+import { connect} from 'react-redux';
 
 let SearchContainer = styled.div`
     width: 60%;
@@ -77,7 +79,7 @@ let SearchContainer = styled.div`
     select::-ms-expand { display: none; }
 `;
 
-export default class Header extends React.Component {
+export class Header extends React.Component {
     constructor() {
         super();
 
@@ -86,6 +88,12 @@ export default class Header extends React.Component {
             searchFilter: 'certificate_number'
         }
     }
+
+    handleLogOut = () => {
+        localStorage.setItem('token', null)
+        this.props.setLoginStatus(false)
+    }
+
     render() {
         return (
             <header className='header_container'>
@@ -119,7 +127,7 @@ export default class Header extends React.Component {
                     </SearchContainer>}
 
                 <section className='header_options'>
-                    <Link to='/login'>
+                    <Link to='/login' onClick={this.handleLogOut}>
                         <div className='header_options_container'>
                             <section>
                                 <img src={Logout} alt='' />
@@ -132,3 +140,12 @@ export default class Header extends React.Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+	return {
+		isLoggedIn: state.isLoggedIn
+	}
+}
+export default connect(mapStateToProps, { setLoginStatus })(
+	Header
+)

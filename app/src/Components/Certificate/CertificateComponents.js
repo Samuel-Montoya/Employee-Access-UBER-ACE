@@ -71,8 +71,6 @@ let PopupBody = styled.section`
     width: 90%;
     text-align: center;
 `;
-
-
 let BackToSearchContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -89,6 +87,7 @@ let BackToSearchContainer = styled.div`
         margin-bottom: 30px;
     }
 `;
+
 export class BackToSearch extends React.Component {
     render() {
         return (
@@ -157,7 +156,6 @@ let RedeemContainer = styled.div`
         }
     }
 `;
-
 let RedeemButton = styled.button`
     width: 100% !important;
     margin: 10px 0 10px 0;
@@ -173,6 +171,7 @@ let RedeemButton = styled.button`
         color: ${props => props.color};
     }
 `;
+
 export class RedeemCertificate extends React.Component {
     constructor() {
         super();
@@ -182,10 +181,15 @@ export class RedeemCertificate extends React.Component {
             customerName: '',
             licensePlate: '',
             carState: 'AL',
-            storeNumber: 937,
+            storeNumber: '',
             currentDate: new Date().toLocaleDateString(),
             currentTime: new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
         }
+    }
+
+    componentDidMount() {
+        console.log(this.props.user)
+        this.setState({ storeNumber: this.props.user.store })
     }
 
     redeemCertificate = () => {
@@ -307,7 +311,7 @@ export class RedeemCertificate extends React.Component {
                                     </div>
                                 </section>
                                 {this.state.currentDate && this.state.currentTime && this.state.storeNumber && this.state.customerName && this.state.licensePlate ?
-                                    <RedeemButton onClick={() => this.redeemCertificate()} color='#42EA1A'>Redeem</RedeemButton>
+                                    <RedeemButton onClick={this.redeemCertificate} color='#42EA1A'>Redeem</RedeemButton>
                                     :
                                     <RedeemButton color='dimgray' onClick={() => document.getElementById('uncomplete_text_controller').style.display = 'block'}>Redeem</RedeemButton>}
                             </RedeemContainer>
@@ -318,7 +322,6 @@ export class RedeemCertificate extends React.Component {
         )
     }
 }
-
 
 let UnRedeemContainer = styled.div`
     width: 70%;

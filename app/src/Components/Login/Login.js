@@ -1,6 +1,8 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import './Login.css'
+import { connect } from 'react-redux'
+import { setLoginStatus, updateUserInfo } from '../../Redux/reducer'
 import axios from 'axios'
 import JiffyLubeLogo from '../../resources/JiffyLubeLogo.png'
 import styled from 'styled-components'
@@ -15,7 +17,7 @@ let ErrorMessageContainer = styled.section`
 	height: 20px;
 `
 
-export default class Login extends React.Component {
+export class Login extends React.Component {
 	constructor() {
 		super()
 
@@ -23,12 +25,13 @@ export default class Login extends React.Component {
 			username: '',
 			password: '',
 			errorMessage: '',
-			didLogIn: false
+			statusMessage: 'Log In',
+			dev: true
 		}
 	}
 
 	logInHandler = () => {
-		this.setState({ errorMessage: '' })
+		this.setState({ errorMessage: '', statusMessage: 'Loading...' })
 		axios
 			.get(
 				`http://localhost:5000/api/authenticate/${this.state.username}/${
@@ -37,16 +40,32 @@ export default class Login extends React.Component {
 			)
 			.then(response => {
 				if (response.data.error) {
-					this.setState({ errorMessage: response.data.error, didLogIn: false })
-				} else if (response.data.storeNumber) {
-					this.setState({ errorMessage: '', didLogIn: true })
+					this.setState({ errorMessage: response.data.error, statusMessage: 'Log In' })
+					this.props.setLoginStatus(false)
+				} else if (response.data.token) {
+					this.setState({ errorMessage: '' })
+					localStorage.setItem('token', response.data.token)
+					this.props.updateUserInfo({
+						username: response.data.username,
+						store: response.data.store
+					})
+					this.props.setLoginStatus(true)
 				}
 			})
 	}
 
+	componentDidMount() {
+		if (this.state.dev) {
+			this.setState({
+				username: 'Shop-524',
+				password: 'testpass'
+			})
+		}
+	}
+
 	render() {
-		if (this.state.didLogIn) {
-			return <Redirect to="/authenticate" />
+		if (this.props.isLoggedIn) {
+			return <Redirect to="/search" />
 		} else {
 			return (
 				<div className="login_page_page-container">
@@ -63,7 +82,6 @@ export default class Login extends React.Component {
 							onChange={input =>
 								this.setState({ username: input.target.value })
 							}
-							onFocus={() => this.setState({ errorMessage: '' })}
 						/>
 						<input
 							value={this.state.password}
@@ -73,12 +91,11 @@ export default class Login extends React.Component {
 							onChange={input =>
 								this.setState({ password: input.target.value })
 							}
-							onFocus={() => this.setState({ errorMessage: '' })}
 						/>
 						<button
 							className="login_page_login-button"
 							onClick={this.logInHandler}>
-							Log In
+							{this.state.statusMessage}
 						</button>
 					</div>
 
@@ -88,3 +105,12 @@ export default class Login extends React.Component {
 		}
 	}
 }
+
+function mapStateToProps(state) {
+	return {
+		isLoggedIn: state.isLoggedIn
+	}
+}
+export default connect(mapStateToProps, { setLoginStatus, updateUserInfo })(
+	Login
+)

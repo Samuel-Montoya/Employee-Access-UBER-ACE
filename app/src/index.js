@@ -1,11 +1,22 @@
-import React from 'react';
+import React from 'react'
 import './Reset.css'
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import 'core-js/fn/string/includes';
+import ReactDOM from 'react-dom'
+import App from './App'
+import registerServiceWorker from './registerServiceWorker'
+import 'core-js/fn/string/includes'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import reducer from './Redux/reducer'
 
-import {BrowserRouter} from 'react-router-dom';
+let store = createStore(reducer)
 
-ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(
+	<Provider store={store}>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</Provider>,
+	document.getElementById('root')
+)
+registerServiceWorker()

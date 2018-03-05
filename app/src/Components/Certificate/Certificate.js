@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { RedeemCertificate, UnRedeemCertificate } from './CertificateComponents';
 import 'babel-polyfill';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 let PageContainer = styled.div`
     width: 100vw;
@@ -172,7 +173,7 @@ let CertInformationContainer = styled.section`
     }
 `;
 
-export default class Certificate extends React.Component {
+export class Certificate extends React.Component {
     constructor() {
         super();
 
@@ -201,6 +202,7 @@ export default class Certificate extends React.Component {
 
     updateCertificate = (fromHeader, certificateNumber) => {
         let newCertificateNumber;
+
         if (!fromHeader) {
             newCertificateNumber = this.props.match.params.certificate_number
         } else {
@@ -223,7 +225,7 @@ export default class Certificate extends React.Component {
                         })
                     })
                 } else {
-                    this.setState({ shouldRedirect: true })
+                    this.setState({ shouldRedirect: true }) 
                 }
             })
         }
@@ -270,7 +272,7 @@ export default class Certificate extends React.Component {
                         }
                     </HeaderButtonContainer>
 
-                    {this.state.showRedeemInfo && <RedeemCertificate certificateInfo={this.state.certificateInfo} updateState={this.updateState} />}
+                    {this.state.showRedeemInfo && <RedeemCertificate certificateInfo={this.state.certificateInfo} updateState={this.updateState} {...this.props} />}
                     {this.state.showUnRedeemInfo && <UnRedeemCertificate certificateInfo={this.state.certificateInfo} updateState={this.updateState} />}
 
                     <CertInformationContainer>
@@ -375,3 +377,10 @@ export default class Certificate extends React.Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+	return {
+		user: state.user
+	}
+}
+export default connect(mapStateToProps)(Certificate)
