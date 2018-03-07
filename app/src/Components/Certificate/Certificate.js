@@ -239,7 +239,7 @@ export class Certificate extends React.Component {
 
     render() {
         if (this.state.shouldRedirect) {
-            return <Redirect to={{ pathname: '/search', query: { resultsToShow: false } }} />
+            // return <Redirect to={{ pathname: '/search', query: { resultsToShow: false } }} />
         }
         return (
             <div style={{ height: '100vh' }}>

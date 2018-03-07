@@ -2,6 +2,7 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setLoginStatus, updateUserInfo } from '../Redux/reducer'
+import Login from './Login/Login'
 import axios from 'axios'
 
 export function authenticateUser(Component) {
@@ -32,7 +33,8 @@ export function authenticateUser(Component) {
 			if (this.props.isLoggedIn) {
 				return <Component {...this.props} />
 			} else {
-				return <Redirect to="/login" />
+				// return <Redirect to="/login" />
+				return <Login {...this.props} />
 			}
 		}
 	}
