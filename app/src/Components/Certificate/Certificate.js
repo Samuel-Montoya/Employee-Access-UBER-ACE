@@ -7,6 +7,7 @@ import { RedeemCertificate, UnRedeemCertificate } from "./CertificateComponents"
 import "babel-polyfill"
 import axios from "axios"
 import { connect } from "react-redux"
+import { backendURL } from '../../urls'
 
 let PageContainer = styled.div`
   width: 100vw;
@@ -216,7 +217,7 @@ export class Certificate extends React.Component {
       })
     } else {
       axios
-        .get("http://localhost:5000/api/get/getAllCertificates")
+        .get(`${backendURL}/api/get/getAllCertificates`)
         .then(allCertificates => {
           let certificate = allCertificates.data.filter(
             certificate =>
@@ -225,8 +226,7 @@ export class Certificate extends React.Component {
           if (certificate) {
             axios
               .get(
-                "http://localhost:5000/api/get/getProductByID/" +
-                  certificate.product_number
+                `${backendURL}/api/get/getProductByID/certificate.product_number`
               )
               .then(product => {
                 this.setState({

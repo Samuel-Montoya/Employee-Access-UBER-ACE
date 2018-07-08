@@ -6,6 +6,7 @@ import { setLoginStatus, updateUserInfo } from "../../Redux/reducer"
 import axios from "axios"
 import JiffyLubeLogo from "../../resources/JiffyLubeLogo.png"
 import styled from "styled-components"
+import { backendURL } from '../../urls'
 
 let ErrorMessageContainer = styled.section`
   position: relative;
@@ -34,7 +35,7 @@ export class Login extends React.Component {
     this.setState({ errorMessage: "", statusMessage: "Loading..." })
     axios
       .get(
-        `http://localhost:5000/api/auth/authenticate/${this.state.username}/${
+        `${backendURL}/api/auth/authenticate/${this.state.username}/${
           this.state.password
         }`
       )

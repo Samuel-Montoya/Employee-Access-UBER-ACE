@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import styled, { keyframes } from "styled-components"
 import moment from "moment"
 import axios from "axios"
+import { backendURL } from '../../urls'
 
 let PopupContainer = styled.div`
   display: flex;
@@ -219,7 +220,7 @@ export class RedeemCertificate extends React.Component {
     tempCertificate.status = "Redeemed"
     tempCertificate.buyer_phone = this.props.certificateInfo.buyer_phone
     axios
-      .post("http://localhost:5000/api/post/updateCertificate", tempCertificate)
+      .post(`${backendURL}/api/post/updateCertificate`, tempCertificate)
       .then(response => {
         this.props.updateState("certificateInfo", response.data)
         this.setState({ didRedeem: true })
@@ -468,7 +469,7 @@ export class UnRedeemCertificate extends React.Component {
     tempCertificate.status = "Redeemable"
     tempCertificate.buyer_phone = this.props.certificateInfo.buyer_phone
     axios
-      .post("http://localhost:5000/api/post/updateCertificate", tempCertificate)
+      .post(`${backendURL}/api/post/updateCertificate`, tempCertificate)
       .then(response => {
         this.props.updateState("certificateInfo", response.data)
         this.setState({ didUnredeem: true })

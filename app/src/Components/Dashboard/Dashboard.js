@@ -4,6 +4,7 @@ import Header from "../Header/Header"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { scroller } from "react-scroll"
+import { backendURL } from '../../urls'
 
 export default class Dashboard extends React.Component {
   constructor() {
@@ -52,10 +53,10 @@ export default class Dashboard extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0)
     axios
-      .get("http://localhost:5000/api/get/getAllCertificates")
+      .get(`${backendURL}/api/get/getAllCertificates`)
       .then(response => {
         axios
-          .get("http://localhost:5000/api/get/getAllProducts")
+          .get(`${backendURL}/api/get/getAllProducts`)
           .then(products => {
             this.setState({
               purchasedCertificates: response.data,

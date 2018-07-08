@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { setLoginStatus, updateUserInfo } from "../Redux/reducer"
 import Login from "./Login/Login"
 import axios from "axios"
+import { backendURL } from '../urls'
 
 export function authenticateUser(Component) {
   class Authenticate extends React.Component {
@@ -11,8 +12,7 @@ export function authenticateUser(Component) {
       if (localStorage.getItem("token")) {
         axios
           .get(
-            "http://localhost:5000/api/auth/verifyToken/" +
-              localStorage.getItem("token")
+            `${backendURL}/api/auth/verifyToken/${localStorage.getItem("token")}`
           )
           .then(response => {
             if (response.data.error) {
